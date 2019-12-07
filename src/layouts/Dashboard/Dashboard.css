@@ -1,0 +1,16 @@
+.dashboard {
+    display: flex;
+}
+
+.dashboard p {
+    font-size: 12px;
+}
+
+.dashboard h1 {
+    font-size: 18px;
+}
+
+.dashboard .logo {
+    cursor: pointer;
+    color: #ffffff;
+}

@@ -1,5 +1,9 @@
 import Button from './Button/Button';
 import Checkbox from './Checkbox/Checkbox';
 import SignInButton from './Google/SignInButton';
+import Header from './Header/Header';
 
-export { Button, Checkbox, SignInButton };
+import Input from './Input/Input';
+import SearchInput from './Input/SearchInput';
+
+export { Button, Checkbox, SignInButton, Header, Input, SearchInput };

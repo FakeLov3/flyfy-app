@@ -1,0 +1,33 @@
+.header-nav {
+    width: 100%;
+    height: 52px;
+    background-color: #303030;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    box-sizing: border-box;
+}
+
+.header-nav .menu {
+    display: flex;
+    align-items: center;
+}
+
+.header-nav .profile {
+    cursor: pointer;
+    width: 26px;
+    height: 26px;
+    background-color: #ffffff;
+    border-radius: 50%;
+}
+
+.header-nav .search {
+    margin-right: 12px;
+}
+
+.header-nav .more {
+    display: flex;
+    cursor: pointer;
+    margin-left: 6px;
+}

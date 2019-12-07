@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import api from '../../services/api';
-import { Checkbox, SignInButton, Button } from '../../components';
+import { Checkbox, SignInButton, Button, Input } from '../../components';
 import './Auth.css';
 
-export default props => {
+export default () => {
     const [inputs, setInputs] = useState({});
     const [remember, setRemember] = useState(false);
 
     const handleSubmit = event => {
         event.preventDefault();
-        api.post('/auth', { ...inputs })
+        api.post('/auth', { ...inputs, remember })
             .then(response => {
                 localStorage.token = response.data.token;
                 window.location.pathname = '/dashboard';
@@ -30,18 +30,20 @@ export default props => {
             <div className="container card">
                 <div className="header">
                     <h1 className="logo">Flyfy</h1>
-                    <p>Welcome back. Please login to your account.</p>
+                    <p className="presentation">
+                        Welcome back. Please login to your account.
+                    </p>
                 </div>
                 <form onSubmit={handleSubmit} onChange={handleInputChange}>
                     <div className="credentials">
-                        <input
+                        <Input
                             autoComplete="on"
                             type="email"
                             name="email"
                             placeholder="E-mail"
                             required
                         />
-                        <input
+                        <Input
                             autoComplete="on"
                             type="password"
                             name="password"
