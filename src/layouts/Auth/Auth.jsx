@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import api from '../../services/api';
-import { Checkbox, SignInButton, Button, Input } from '../../components';
+import { Checkbox, SignInButton, Button, IconInput } from '../../components';
+import Icon from '@mdi/react';
+import { mdiAt, mdiLock } from '@mdi/js';
 import './Auth.css';
 
 export default () => {
@@ -36,14 +38,28 @@ export default () => {
                 </div>
                 <form onSubmit={handleSubmit} onChange={handleInputChange}>
                     <div className="credentials">
-                        <Input
+                        <IconInput
+                            align="left"
+                            className="auth-input"
+                            icon={
+                                <Icon path={mdiAt} size={0.8} color="#303030" />
+                            }
                             autoComplete="on"
                             type="email"
                             name="email"
                             placeholder="E-mail"
                             required
                         />
-                        <Input
+                        <IconInput
+                            align="left"
+                            className="auth-input"
+                            icon={
+                                <Icon
+                                    path={mdiLock}
+                                    size={0.8}
+                                    color="#303030"
+                                />
+                            }
                             autoComplete="on"
                             type="password"
                             name="password"

@@ -55,9 +55,18 @@
 }
 
 .auth .credentials input {
+    width: 100%;
+}
+
+.auth .credentials .auth-input {
     border: 1px solid #303030;
-    border-radius: 5px;
-    margin: 6px 0 0;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 6px;
+}
+
+.auth .credentials .auth-input svg {
+    margin-right: 6px;
 }
 
 .auth .options {

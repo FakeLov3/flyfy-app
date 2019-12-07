@@ -4,6 +4,6 @@ import SignInButton from './Google/SignInButton';
 import Header from './Header/Header';
 
 import Input from './Input/Input';
-import SearchInput from './Input/SearchInput';
+import IconInput from './Input/IconInput';
 
-export { Button, Checkbox, SignInButton, Header, Input, SearchInput };
+export { Button, Checkbox, SignInButton, Header, Input, IconInput };
