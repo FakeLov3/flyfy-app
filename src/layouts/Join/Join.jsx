@@ -26,6 +26,11 @@ export default props => {
         }));
     };
 
+    const handleValidation = event => {
+        event.persist();
+        console.log(event.target.value);
+    };
+
     return (
         <div className="layout auth">
             <div className="container card">
@@ -33,12 +38,14 @@ export default props => {
                     <h1 className="logo">Join our community</h1>
                 </div>
                 <form
+                    autoComplete="new-password"
                     spellCheck={false}
                     onSubmit={handleSubmit}
                     onChange={handleInputChange}
                 >
                     <div className="credentials">
                         <Input
+                            onBlur={handleValidation}
                             align="left"
                             className="auth-input"
                             icon={

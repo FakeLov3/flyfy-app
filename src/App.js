@@ -1,6 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Routes from './routes';
+import { Loader } from './components';
+import { LoaderContext } from './config/context';
 
-const App = () => <Routes />;
+export default () => {
+    const [loader, setLoader] = useState('');
 
-export default App;
+    return (
+        <LoaderContext.Provider value={{ setLoader }}>
+            <Loader className={loader} />
+            <Routes />
+        </LoaderContext.Provider>
+    );
+};

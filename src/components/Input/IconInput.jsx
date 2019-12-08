@@ -4,7 +4,10 @@ import './Input.css';
 
 export default props => {
     return (
-        <div className={`_search-input ${props.className || ''}`}>
+        <div
+            style={props.style || {}}
+            className={`_search-input ${props.className || ''}`}
+        >
             <Input
                 {...props}
                 className="_search"

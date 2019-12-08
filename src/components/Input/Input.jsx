@@ -4,6 +4,9 @@ import './Input.css';
 export default props => {
     return (
         <input
+            readOnly={props.readOnly || false}
+            onChange={props.onChange || null}
+            onBlur={props.onBlur || null}
             style={props.style || {}}
             className={`_input ${props.className || ''}`}
             autoComplete={props.autoComplete || 'off'}

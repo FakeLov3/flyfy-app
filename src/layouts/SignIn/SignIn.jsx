@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { LoaderContext } from '../../config/context';
 import api from '../../services/api';
 import { Checkbox, SignInButton, Button, Input } from '../../components';
 import Icon from '@mdi/react';
@@ -7,15 +8,20 @@ import { mdiAt, mdiLock } from '@mdi/js';
 export default () => {
     const [inputs, setInputs] = useState({});
     const [remember, setRemember] = useState(false);
+    const { setLoader } = useContext(LoaderContext);
 
     const handleSubmit = event => {
         event.preventDefault();
+        setLoader('active');
         api.post('/auth', { ...inputs, remember })
             .then(response => {
                 localStorage.token = response.data.token;
                 window.location.pathname = '/dashboard';
             })
-            .catch(error => console.error(error));
+            .catch(error => {
+                console.error(error);
+                setLoader('');
+            });
     };
 
     const handleInputChange = event => {
@@ -120,10 +126,6 @@ export default () => {
                         </div>
                     </div>
                 </form>
-                {/* <div className="footer">
-                    <p>Terms and Conditions</p>
-                    <p>Privacy Policy</p>
-                </div> */}
             </div>
         </div>
     );
