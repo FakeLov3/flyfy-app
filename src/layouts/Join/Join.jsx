@@ -2,12 +2,80 @@ import React, { useState } from 'react';
 import api from '../../services/api';
 import { Checkbox, Button, Input } from '../../components';
 import Icon from '@mdi/react';
-import { mdiAccount, mdiAt, mdiLock, mdiEye, mdiEyeOff } from '@mdi/js';
+import {
+    mdiAccount,
+    mdiAt,
+    mdiLock,
+    mdiEye,
+    mdiEyeOff,
+    mdiAlertCircle,
+} from '@mdi/js';
 
 export default props => {
     const [inputs, setInputs] = useState({});
     const [showPassword, setShowPassword] = useState(false);
     const [terms, setTerms] = useState(false);
+
+    const form = [
+        {
+            name: 'user',
+            type: 'text',
+            placeholder: 'Username',
+            icons: [
+                <Icon style={{ order: 0 }} path={mdiAccount} />,
+                <Icon
+                    className="error"
+                    style={{
+                        order: 2,
+                        margin: 0,
+                    }}
+                    path={mdiAlertCircle}
+                    color="red"
+                />,
+            ],
+        },
+        {
+            name: 'email',
+            type: 'email',
+            placeholder: 'E-mail',
+            icons: [
+                <Icon style={{ order: 0 }} path={mdiAt} />,
+                <Icon
+                    className="error"
+                    style={{
+                        order: 2,
+                        margin: 0,
+                    }}
+                    path={mdiAlertCircle}
+                    color="red"
+                />,
+            ],
+        },
+        {
+            name: 'password',
+            type: showPassword ? 'text' : 'password',
+            placeholder: 'Password',
+            icons: [
+                <Icon style={{ order: 0 }} path={mdiLock} />,
+                <Icon
+                    onMouseUp={() => setShowPassword(false)}
+                    onMouseDown={() => setShowPassword(true)}
+                    onMouseLeave={() => setShowPassword(false)}
+                    style={{
+                        order: 2,
+                        margin: 0,
+                        cursor: 'pointer',
+                    }}
+                    path={showPassword ? mdiEyeOff : mdiEye}
+                />,
+            ],
+        },
+    ];
+
+    const formInputs = {};
+    form.map(input => (formInputs[input.name] = 'neutral'));
+
+    const [status, setStatus] = useState(formInputs);
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -28,7 +96,17 @@ export default props => {
 
     const handleValidation = event => {
         event.persist();
-        console.log(event.target.value);
+        const name = event.target.name;
+        if (event.target.value.length > 0 && name !== 'password') {
+            api.get(`/validate/${name}=${event.target.value}`)
+                .then(response =>
+                    setStatus(status => ({
+                        ...status,
+                        [name]: !response.data.available ? 'error' : 'success',
+                    }))
+                )
+                .catch(error => console.error(error));
+        }
     };
 
     return (
@@ -44,64 +122,54 @@ export default props => {
                     onChange={handleInputChange}
                 >
                     <div className="credentials">
-                        <Input
-                            onBlur={handleValidation}
-                            align="left"
-                            className="auth-input"
-                            icon={
-                                <Icon
-                                    path={mdiAccount}
-                                    size={0.7}
-                                    color="#303030"
-                                />
-                            }
-                            type="text"
-                            name="user"
-                            placeholder="Username"
-                            required
-                        />
-                        <Input
-                            align="left"
-                            className="auth-input"
-                            icon={
-                                <Icon path={mdiAt} size={0.7} color="#303030" />
-                            }
-                            type="email"
-                            name="email"
-                            placeholder="E-mail"
-                            required
-                        />
-                        <Input
-                            align="left"
-                            className="auth-input"
-                            icon={[
-                                <Icon
-                                    key={0}
-                                    style={{ order: 0 }}
-                                    path={mdiLock}
-                                    size={0.7}
-                                    color="#303030"
-                                />,
-                                <Icon
-                                    key={1}
-                                    onMouseUp={() => setShowPassword(false)}
-                                    onMouseDown={() => setShowPassword(true)}
-                                    onMouseLeave={() => setShowPassword(false)}
-                                    style={{
-                                        order: 2,
-                                        margin: 0,
-                                        cursor: 'pointer',
-                                    }}
-                                    path={showPassword ? mdiEyeOff : mdiEye}
-                                    size={0.7}
-                                    color="#303030"
-                                />,
-                            ]}
-                            type={showPassword ? 'text' : 'password'}
-                            name="password"
-                            placeholder="Password"
-                            required
-                        />
+                        {form.map((input, i) => (
+                            <Input
+                                key={i}
+                                onBlur={handleValidation}
+                                onChange={() =>
+                                    setStatus(status => ({
+                                        ...status,
+                                        [input.name]: 'neutral',
+                                    }))
+                                }
+                                align="left"
+                                className={`auth-input ${status[input.name]}`}
+                                icon={input.icons.map(({ props }, j) => {
+                                    const { style, className } = props;
+                                    return (
+                                        <Icon
+                                            key={j}
+                                            {...props}
+                                            style={{
+                                                ...style,
+                                                opacity:
+                                                    className === 'error'
+                                                        ? status[input.name] ===
+                                                          'error'
+                                                            ? 1
+                                                            : 0
+                                                        : 1,
+                                                transition:
+                                                    'opacity 0.25s ease',
+                                            }}
+                                            size={0.7}
+                                            color={
+                                                status[input.name] === 'error'
+                                                    ? 'red'
+                                                    : status[input.name] ===
+                                                      'neutral'
+                                                    ? '#303030'
+                                                    : 'green'
+                                            }
+                                        />
+                                    );
+                                })}
+                                type={input.type}
+                                name={input.name}
+                                placeholder={input.placeholder}
+                                required
+                            />
+                        ))}
                     </div>
                     <div className="options">
                         <div
@@ -135,10 +203,6 @@ export default props => {
                         />
                     </div>
                 </form>
-                {/* <div className="footer">
-                    <p>Terms and Conditions</p>
-                    <p>Privacy Policy</p>
-                </div> */}
             </div>
         </div>
     );

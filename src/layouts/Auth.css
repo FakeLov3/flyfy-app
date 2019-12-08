@@ -119,3 +119,24 @@
     align-items: center;
     padding: 24px;
 }
+
+.auth .credentials .auth-input.invalid,
+.auth .credentials .auth-input.error {
+    border-color: red;
+}
+
+.auth .credentials .auth-input.invalid input,
+.auth .credentials .auth-input.invalid input::placeholder,
+.auth .credentials .auth-input.error input,
+.auth .credentials .auth-input.error input::placeholder {
+    color: red;
+}
+
+.auth .credentials .auth-input.success {
+    border-color: green;
+}
+
+.auth .credentials .auth-input.success input,
+.auth .credentials .auth-input.success input::placeholder {
+    color: green;
+}
