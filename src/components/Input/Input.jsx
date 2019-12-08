@@ -4,8 +4,9 @@ import './Input.css';
 export default props => {
     return (
         <input
+            style={props.style || {}}
             className={`_input ${props.className || ''}`}
-            autoComplete={props.autoComplete || 'on'}
+            autoComplete={props.autoComplete || 'off'}
             type={props.type || 'text'}
             name={props.name || ''}
             placeholder={props.placeholder || ''}

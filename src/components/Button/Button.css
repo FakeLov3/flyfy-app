@@ -1,14 +1,18 @@
 .btn {
+    width: auto;
+    height: 34px;
     cursor: pointer;
     display: flex;
     align-items: center;
     border: none;
     border-radius: 5px;
     box-sizing: border-box;
+    box-shadow: 0 0.75px 2px 0.5px #30303030;
     padding: 8px 12px;
     background-color: #303030;
     color: #ffffff;
     outline: none;
+    font-family: 'Circular';
     font-size: 12px;
     font-weight: bold;
     transition: background-color 0.25s ease;

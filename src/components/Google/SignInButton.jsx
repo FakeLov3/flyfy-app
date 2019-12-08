@@ -13,19 +13,16 @@ export default props => {
 
 const styles = {
     buttonContainer: {
-        margin: 'auto',
-        cursor: 'pointer',
-        display: 'flex',
-        alignItems: 'center',
         backgroundColor: '#ffffff',
-        boxShadow: 'rgba(48, 48, 48, 0.25) 0px 0px 1.75px 0.75px',
     },
     googleLogo: {
         width: '16px',
-        margin: '0 18px 0 0',
+        margin: '0',
         heigth: 'auto',
     },
     signInWithGoogle: {
+        margin: 'auto',
+        fontFamily: 'Roboto',
         fontSize: 12,
         fontWeight: 'bold',
         color: '#505050',
