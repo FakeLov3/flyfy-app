@@ -120,6 +120,12 @@
     padding: 24px;
 }
 
+.auth .credentials .message {
+    opacity: 0;
+    margin: 4px 0 0 4px;
+    transition: opacity 0.25s ease;
+}
+
 .auth .credentials .auth-input.invalid,
 .auth .credentials .auth-input.error {
     border-color: red;
@@ -128,7 +134,8 @@
 .auth .credentials .auth-input.invalid input,
 .auth .credentials .auth-input.invalid input::placeholder,
 .auth .credentials .auth-input.error input,
-.auth .credentials .auth-input.error input::placeholder {
+.auth .credentials .auth-input.error input::placeholder,
+.auth .credentials .message.error {
     color: red;
 }
 
@@ -137,6 +144,11 @@
 }
 
 .auth .credentials .auth-input.success input,
-.auth .credentials .auth-input.success input::placeholder {
+.auth .credentials .auth-input.success input::placeholder,
+.auth .credentials .message.success {
     color: green;
+}
+
+.auth .credentials .message.error {
+    opacity: 1;
 }
