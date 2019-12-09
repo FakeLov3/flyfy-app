@@ -110,6 +110,14 @@
 .auth .submit-button {
     align-items: center;
     justify-content: center;
+    pointer-events: none;
+    opacity: 0.25;
+    transition: opacity 0.25s ease;
+}
+
+.auth .submit-button.active {
+    pointer-events: all;
+    opacity: 1;
 }
 
 .auth .footer {
@@ -149,6 +157,7 @@
     color: green;
 }
 
-.auth .credentials .message.error {
+.auth .credentials .message.error,
+.auth .credentials .message.success {
     opacity: 1;
 }

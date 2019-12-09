@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { LoaderContext } from '../../config/context';
 import api from '../../services/api';
 import { Checkbox, Button, Input } from '../../components';
@@ -16,6 +16,7 @@ export default props => {
     const [inputs, setInputs] = useState({});
     const [showPassword, setShowPassword] = useState(false);
     const [terms, setTerms] = useState(false);
+    const [credentials, setCredentials] = useState(false);
     const { setLoader } = useContext(LoaderContext);
 
     const form = [
@@ -74,26 +75,34 @@ export default props => {
         },
     ];
 
-    const formInputs = {};
+    const st = {};
     form.map(
         input =>
-            (formInputs[input.name] = {
+            (st[input.name] = {
                 status: 'neutral',
-                message: '',
             })
     );
 
-    const [status, setStatus] = useState(formInputs);
+    const [status, setStatus] = useState(st);
+
+    useEffect(() => {
+        const attributes = [terms];
+        for (let i in status) {
+            attributes.push(status[i].status === 'success');
+        }
+        setCredentials(attributes.every(one => one));
+    }, [status, terms]);
 
     const handleSubmit = event => {
         event.preventDefault();
         setLoader('active');
-        api.post('/createUser', { ...inputs })
-            .then(() => (window.location.pathname = '/'))
-            .catch(error => {
-                setLoader('');
-                console.error(error);
-            });
+        credentials &&
+            api
+                .post('/createUser', { ...inputs })
+                .then(() => {
+                    window.location.pathname = '/';
+                })
+                .catch(error => setLoader(''));
     };
 
     const handleInputChange = event => {
@@ -225,7 +234,9 @@ export default props => {
                     </div>
                     <div className="submit">
                         <Button
-                            className="submit-button"
+                            className={`submit-button${
+                                credentials ? ' active' : ''
+                            }`}
                             type="submit"
                             label="Create account"
                         />

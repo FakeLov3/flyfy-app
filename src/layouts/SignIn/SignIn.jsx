@@ -19,7 +19,6 @@ export default () => {
                 window.location.pathname = '/dashboard';
             })
             .catch(error => {
-                console.error(error);
                 setLoader('');
             });
     };
@@ -102,7 +101,7 @@ export default () => {
                     </div>
                     <div className="submit">
                         <Button
-                            className="submit-button"
+                            className="submit-button active"
                             type="submit"
                             label="Sign in"
                         />
