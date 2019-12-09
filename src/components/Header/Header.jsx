@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconInput } from '../';
+import { Input } from '../';
 import Icon from '@mdi/react';
 import { mdiDotsVertical, mdiMagnify } from '@mdi/js';
 import './Header.css';
@@ -9,7 +9,7 @@ export default props => {
         <header className="header-nav">
             <h1 className="logo">Flyfy</h1>
             <div className="menu">
-                <IconInput
+                <Input
                     placeholder="Pesquisar"
                     icon={
                         <Icon

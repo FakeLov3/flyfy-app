@@ -1,22 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { LoaderContext } from '../../config/context';
 import api from '../../services/api';
-import { Checkbox, SignInButton, Button, IconInput } from '../../components';
+import { Checkbox, SignInButton, Button, Input } from '../../components';
 import Icon from '@mdi/react';
 import { mdiAt, mdiLock } from '@mdi/js';
-import './Auth.css';
 
 export default () => {
     const [inputs, setInputs] = useState({});
     const [remember, setRemember] = useState(false);
+    const { setLoader } = useContext(LoaderContext);
 
     const handleSubmit = event => {
         event.preventDefault();
+        setLoader('active');
         api.post('/auth', { ...inputs, remember })
             .then(response => {
                 localStorage.token = response.data.token;
                 window.location.pathname = '/dashboard';
             })
-            .catch(error => console.error(error));
+            .catch(error => {
+                setLoader('');
+            });
     };
 
     const handleInputChange = event => {
@@ -36,13 +40,17 @@ export default () => {
                         Welcome back. Please login to your account.
                     </p>
                 </div>
-                <form onSubmit={handleSubmit} onChange={handleInputChange}>
+                <form
+                    spellCheck={false}
+                    onSubmit={handleSubmit}
+                    onChange={handleInputChange}
+                >
                     <div className="credentials">
-                        <IconInput
+                        <Input
                             align="left"
                             className="auth-input"
                             icon={
-                                <Icon path={mdiAt} size={0.8} color="#303030" />
+                                <Icon path={mdiAt} size={0.7} color="#303030" />
                             }
                             autoComplete="on"
                             type="email"
@@ -50,13 +58,13 @@ export default () => {
                             placeholder="E-mail"
                             required
                         />
-                        <IconInput
+                        <Input
                             align="left"
                             className="auth-input"
                             icon={
                                 <Icon
                                     path={mdiLock}
-                                    size={0.8}
+                                    size={0.7}
                                     color="#303030"
                                 />
                             }
@@ -93,16 +101,23 @@ export default () => {
                     </div>
                     <div className="submit">
                         <Button
-                            className="submit-button"
+                            className="submit-button active"
                             type="submit"
-                            label="Sign In"
+                            label="Sign in"
                         />
                         <SignInButton />
                         <div className="signup">
                             <p>
                                 Not a member yet?{' '}
                                 <span
-                                    style={{ color: 'blue', cursor: 'pointer' }}
+                                    onClick={() =>
+                                        (window.location.pathname = '/join')
+                                    }
+                                    style={{
+                                        cursor: 'pointer',
+                                        color: 'blue',
+                                        fontFamily: 'Circular',
+                                    }}
                                 >
                                     Signup
                                 </span>
@@ -110,10 +125,6 @@ export default () => {
                         </div>
                     </div>
                 </form>
-                <div className="footer">
-                    <p>Terms and Conditions</p>
-                    <p>Privacy Policy</p>
-                </div>
             </div>
         </div>
     );

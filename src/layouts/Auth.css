@@ -8,8 +8,14 @@
 
 .auth .btn {
     margin: 6px auto !important;
-    height: 32px;
-    width: 180px;
+}
+
+.auth .btn,
+.auth .card,
+.auth .credentials input,
+.auth .credentials .auth-input,
+.auth .submit {
+    width: 100%;
 }
 
 .auth .card {
@@ -21,7 +27,6 @@
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 0px 1px 0.5px #30303030;
-    width: 100%;
     min-width: 300px;
     max-width: 500px;
     height: auto;
@@ -54,13 +59,8 @@
     flex-direction: column;
 }
 
-.auth .credentials input {
-    width: 100%;
-}
-
 .auth .credentials .auth-input {
     border: 1px solid #303030;
-    width: 100%;
     box-sizing: border-box;
     margin-top: 6px;
 }
@@ -92,8 +92,7 @@
     display: flex;
     flex-direction: column;
     min-width: 150px;
-    max-width: 250px;
-    width: 100%;
+    max-width: 180px;
     margin: 12px auto;
 }
 
@@ -111,6 +110,14 @@
 .auth .submit-button {
     align-items: center;
     justify-content: center;
+    pointer-events: none;
+    opacity: 0.25;
+    transition: opacity 0.25s ease;
+}
+
+.auth .submit-button.active {
+    pointer-events: all;
+    opacity: 1;
 }
 
 .auth .footer {
@@ -119,4 +126,38 @@
     justify-content: space-between;
     align-items: center;
     padding: 24px;
+}
+
+.auth .credentials .message {
+    opacity: 0;
+    margin: 4px 0 0 4px;
+    transition: opacity 0.25s ease;
+}
+
+.auth .credentials .auth-input.invalid,
+.auth .credentials .auth-input.error {
+    border-color: red;
+}
+
+.auth .credentials .auth-input.invalid input,
+.auth .credentials .auth-input.invalid input::placeholder,
+.auth .credentials .auth-input.error input,
+.auth .credentials .auth-input.error input::placeholder,
+.auth .credentials .message.error {
+    color: red;
+}
+
+.auth .credentials .auth-input.success {
+    border-color: green;
+}
+
+.auth .credentials .auth-input.success input,
+.auth .credentials .auth-input.success input::placeholder,
+.auth .credentials .message.success {
+    color: green;
+}
+
+.auth .credentials .message.error,
+.auth .credentials .message.success {
+    opacity: 1;
 }

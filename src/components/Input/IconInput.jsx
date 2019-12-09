@@ -5,12 +5,16 @@ import './Input.css';
 export default props => {
     return (
         <div
-            style={{
-                flexDirection: props.align === 'left' ? 'row-reverse' : 'row',
-            }}
+            style={props.style || {}}
             className={`_search-input ${props.className || ''}`}
         >
-            <Input {...props} className="_search" />
+            <Input
+                {...props}
+                className="_search"
+                style={{
+                    order: props.align === 'left' ? 1 : 0,
+                }}
+            />
             {props.icon || null}
         </div>
     );
