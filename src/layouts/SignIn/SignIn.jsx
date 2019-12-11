@@ -35,7 +35,7 @@ export default () => {
         <div className="layout auth">
             <div className="container card">
                 <div className="header">
-                    <h1 className="logo">Flyfy</h1>
+                    <h1 className="logo">flyfy</h1>
                     <p className="presentation">
                         Welcome back. Please login to your account.
                     </p>
