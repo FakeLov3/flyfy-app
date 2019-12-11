@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Button, Bar, Feed, Friends, Card } from '../../components';
+import { Header, CreatePost, Bar, Feed, Friends } from '../../components';
 import './Dashboard.scss';
 
 export default props => {
@@ -8,7 +8,9 @@ export default props => {
             <Header />
             <div className="content">
                 <Bar />
-                <Feed></Feed>
+                <Feed>
+                    <CreatePost />
+                </Feed>
                 <Friends />
             </div>
         </div>
