@@ -1,6 +1,28 @@
 .feed {
     width: 100%;
     background-color: #505050;
-    padding: 12px;
+    padding: 0 12px;
     box-sizing: border-box;
+
+    .main {
+        margin: 24px 0;
+        max-width: 500px;
+        width: 100%;
+    }
+
+    .posts {
+        display: flex;
+        flex-direction: column;
+        padding: 12px;
+        box-sizing: border-box;
+        border-radius: 5px;
+        background-color: #ffffff;
+
+        .recent-posts {
+            margin: 0 0 12px 0;
+            color: #303030;
+            font-weight: bold;
+            font-family: 'Circular';
+        }
+    }
 }
