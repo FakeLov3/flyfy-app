@@ -9,7 +9,8 @@ import SignInButton from './Google/SignInButton';
 import Header from './Header/Header';
 import Input from './Input/IconInput';
 import Loader from './Loader/Loader';
-import Post from './Post/Post';
+
+import './Feed/Feed.scss';
 
 export {
     Bar,
@@ -23,5 +24,4 @@ export {
     Header,
     Input,
     Loader,
-    Post,
 };
