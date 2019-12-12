@@ -15,15 +15,7 @@ export default props => {
     const handleNewPost = () => {
         setLoader('active');
         const token = localStorage.token;
-        api.post(
-            '/createPost',
-            { text },
-            {
-                headers: {
-                    authorization: token,
-                },
-            }
-        )
+        api.post('/createPost', { text })
             .then(() =>
                 api
                     .get('feed')

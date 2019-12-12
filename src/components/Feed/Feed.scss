@@ -19,6 +19,34 @@
         border-radius: 5px;
         background-color: #ffffff;
 
+        .lil-loader {
+            opacity: 0;
+            pointer-events: none;
+            margin: auto;
+            transition: opacity 0.25s ease;
+        }
+    }
+
+    .posts.loading {
+        height: 300px;
+        .recent-posts {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .lil-loader {
+            opacity: 1;
+        }
+    }
+
+    .posts.error {
+        .recent-posts {
+            opacity: 0;
+            pointer-events: none;
+        }
+    }
+
+    .posts.success {
         .recent-posts {
             margin: 0 0 12px 0;
             color: #303030;
@@ -80,8 +108,9 @@
             }
 
             .post-footer {
-                .icon {
+                .action {
                     cursor: pointer;
+                    margin: 0 12px 0 0;
                 }
             }
         }

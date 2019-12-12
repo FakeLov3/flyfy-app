@@ -7,22 +7,27 @@ import './Feed.scss';
 
 export default props => {
     const [feed, setFeed] = useContext(FeedContext);
+    const [status, setStatus] = useState('loading');
     const { posts } = feed;
 
     useEffect(() => {
         api.get('/feed')
-            .then(({ data }) => setFeed(feed => ({ ...feed, posts: data })))
-            .catch(error => console.error(error));
+            .then(({ data }) => {
+                console.log(data);
+                setStatus('success');
+                setFeed(feed => ({ ...feed, posts: data }));
+            })
+            .catch(error => {
+                setStatus('error');
+                console.error(error);
+            });
     }, []);
 
     return (
         <div className="feed">
             <main className="main">
                 <CreatePost />
-                <div className="posts">
-                    <p className="recent-posts">Recent posts</p>
-                    <Posts posts={posts} />
-                </div>
+                <Posts posts={posts} status={status} />
             </main>
         </div>
     );
