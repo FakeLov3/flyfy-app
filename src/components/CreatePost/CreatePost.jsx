@@ -11,23 +11,18 @@ export default props => {
     const [text, setText] = useState('');
     const [feed, setFeed] = useContext(FeedContext);
     const { setLoader } = useContext(LoaderContext);
+    const { posts } = feed;
 
     const handleNewPost = () => {
         setLoader('active');
-        const token = localStorage.token;
         api.post('/createPost', { text })
-            .then(() =>
-                api
-                    .get('feed')
-                    .then(({ data }) => {
-                        setFeed(feed => ({ ...feed, posts: data }));
-                        setLoader('');
-                    })
-                    .catch(error => console.error(error))
-            )
-            .catch(error => {
-                console.error(error);
+            .then(({ data }) => {
+                setFeed(feed => ({ ...feed, posts: [...data, ...posts] }));
                 setLoader('');
+            })
+            .catch(error => {
+                setLoader('');
+                console.error(error);
             });
     };
 

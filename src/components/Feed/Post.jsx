@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { Card, Button } from '../';
+import { Card } from '../';
 import api from '../../services/api';
 import Icon from '@mdi/react';
-import { mdiThumbUp, mdiThumbUpOutline, mdiMessageOutline } from '@mdi/js';
+import { /*mdiThumbUp,*/ mdiThumbUpOutline, mdiMessageOutline } from '@mdi/js';
 
 export default ({ post }) => {
     const [reactions, setReactions] = useState(post.reactions || []);
-    const [comments, setComments] = useState(post.comments || []);
+    const [comments /*, setComments*/] = useState(post.comments || []);
 
     const handlePostLike = id => {
         api.post('/likePost', {

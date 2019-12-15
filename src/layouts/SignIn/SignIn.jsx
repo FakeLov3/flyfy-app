@@ -14,8 +14,8 @@ export default () => {
         event.preventDefault();
         setLoader('active');
         api.post('/auth', { ...inputs, remember })
-            .then(response => {
-                localStorage.token = response.data.token;
+            .then(({ data }) => {
+                localStorage.token = data.token;
                 window.location.pathname = '/dashboard';
             })
             .catch(error => {
