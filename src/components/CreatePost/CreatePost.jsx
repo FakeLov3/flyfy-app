@@ -20,10 +20,7 @@ export default props => {
                 setFeed(feed => ({ ...feed, posts: [...data, ...posts] }));
                 setLoader('');
             })
-            .catch(error => {
-                setLoader('');
-                console.error(error);
-            });
+            .catch(error => setLoader(''));
     };
 
     return (

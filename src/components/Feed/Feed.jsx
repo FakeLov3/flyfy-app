@@ -13,10 +13,7 @@ export default props => {
     const feedRef = useRef(null);
     const { limit, posts } = feed;
 
-    useEffect(() => {
-        handleFeedScroll();
-        // // eslint-disable-next-line
-    }, []);
+    useEffect(() => getFeedPosts(), []);
 
     const getFeedPosts = () => {
         setStatus('loading');
@@ -26,25 +23,25 @@ export default props => {
                 setOverload(data.length < limit || data.length === 0);
                 if (data.length > 0) {
                     setOffset(offset => offset + limit);
-                    setFeed(feed => ({ ...feed, posts: [...posts, ...data] }));
+                    setFeed(feed => ({
+                        ...feed,
+                        posts: [...posts, ...data],
+                    }));
                 }
             })
             .catch(() => setStatus('error'));
     };
 
     const handleFeedScroll = () => {
-        let { scrollTop } = feedRef.current,
-            bottom =
-                feedRef.current.scrollHeight -
-                feedRef.current.offsetHeight -
-                50;
-        scrollTop >= bottom && getFeedPosts();
+        let { scrollTop, scrollHeight, offsetHeight } = feedRef.current;
+        let bottom = scrollHeight - offsetHeight - 50;
+        scrollTop >= bottom && status !== 'loading' && getFeedPosts();
     };
 
     return (
         <div
             onScroll={() => !overload && handleFeedScroll()}
-            className="feed"
+            className="feed view"
             ref={feedRef}
         >
             <main className="main">

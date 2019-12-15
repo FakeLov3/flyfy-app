@@ -8,6 +8,7 @@ export default props => {
             onChange={props.onChange || null}
             onBlur={props.onBlur || null}
             style={props.style || {}}
+            spellCheck={props.spellCheck || 'false'}
             className={`_input ${props.className || ''}`}
             autoComplete={props.autoComplete || 'off'}
             type={props.type || 'text'}

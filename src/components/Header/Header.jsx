@@ -10,13 +10,13 @@ export default props => {
             <h1 className="logo">flyfy</h1>
             <div className="menu">
                 <Input
-                    placeholder="Pesquisar"
+                    placeholder="Search anything..."
                     icon={
                         <Icon
                             className="icon search-icon"
                             path={mdiMagnify}
                             size={0.8}
-                            color="#303030"
+                            color="#ffffff"
                         />
                     }
                     className="search"

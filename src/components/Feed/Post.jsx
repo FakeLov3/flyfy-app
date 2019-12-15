@@ -3,28 +3,54 @@ import { formatDate } from '../../services/formatters';
 import { Card } from '../';
 import api from '../../services/api';
 import Icon from '@mdi/react';
-import { /*mdiThumbUp,*/ mdiThumbUpOutline, mdiMessageOutline } from '@mdi/js';
+import { mdiThumbUp, mdiThumbUpOutline, mdiMessageOutline } from '@mdi/js';
 
 export default ({ post }) => {
+    const [liked, setLiked] = useState(post.liked);
     const [reactions, setReactions] = useState(post.reactions || []);
     const [comments /*, setComments*/] = useState(post.comments || []);
 
-    const handlePostLike = id => {
-        api.post('/likePost', {
-            post: id,
-        })
+    const handlePostLike = post => {
+        api.post('/likePost', { post })
             .then(({ data }) => {
                 setReactions(reactions => [...reactions, data]);
+                setLiked(true);
             })
             .catch(error => console.error(error));
     };
 
+    const handleUserProfileClick = user => {
+        console.log(user);
+    };
+
+    const likedString = `${
+        liked
+            ? reactions.length < 2
+                ? 'You liked this'
+                : `You and ${reactions.length - 1} people liked this`
+            : reactions.length > 1
+            ? `${reactions.length} likes`
+            : reactions.length < 1
+            ? `Be the first one to like this`
+            : `${reactions.length} like`
+    } `;
+
     return (
         <Card className="post">
             <div className="profile">
-                <div className="profile-pic"></div>
+                <div
+                    onClick={() => handleUserProfileClick(post.user)}
+                    className="profile-pic"
+                ></div>
                 <div>
-                    <p className="post-user">{post.user.user}</p>
+                    <p
+                        onClick={() =>
+                            (window.location.pathname = `/dashboard/${post.user.user}`)
+                        }
+                        className="post-user"
+                    >
+                        {post.user.user}
+                    </p>
                     <p className="post-date info">
                         {formatDate(post.createdAt)}
                     </p>
@@ -34,12 +60,20 @@ export default ({ post }) => {
                 <p className="post-text">{post.text}</p>
             </div>
             <div className="post-status">
-                <p>{reactions.length} likes</p>
-                <p>{comments.length} comments</p>
+                <p>{likedString}</p>
+                <p>
+                    {comments.length === 1
+                        ? `${comments.length} comment`
+                        : `${comments.length} comments`}
+                </p>
             </div>
             <div className="post-footer">
                 <div className="action" onClick={() => handlePostLike(post.id)}>
-                    <Icon path={mdiThumbUpOutline} size={0.7} color="#303030" />
+                    <Icon
+                        path={liked ? mdiThumbUp : mdiThumbUpOutline}
+                        size={0.7}
+                        color="#303030"
+                    />
                 </div>
                 <div className="action">
                     <Icon path={mdiMessageOutline} size={0.7} color="#303030" />
