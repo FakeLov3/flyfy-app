@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { formatDate } from '../../services/formatters';
 import { Card } from '../';
 import api from '../../services/api';
 import Icon from '@mdi/react';
@@ -22,9 +23,11 @@ export default ({ post }) => {
         <Card className="post">
             <div className="profile">
                 <div className="profile-pic"></div>
-                <div className="post-info">
-                    <p className="post-user info">{post.user.user}</p>
-                    <p className="info">{post.createdAt}</p>
+                <div>
+                    <p className="post-user">{post.user.user}</p>
+                    <p className="post-date info">
+                        {formatDate(post.createdAt)}
+                    </p>
                 </div>
             </div>
             <div className="post-content">
@@ -38,7 +41,6 @@ export default ({ post }) => {
                 <div className="action" onClick={() => handlePostLike(post.id)}>
                     <Icon path={mdiThumbUpOutline} size={0.7} color="#303030" />
                 </div>
-
                 <div className="action">
                     <Icon path={mdiMessageOutline} size={0.7} color="#303030" />
                 </div>
