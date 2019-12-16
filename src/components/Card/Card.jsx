@@ -3,6 +3,11 @@ import './Card.scss';
 
 export default props => {
     return (
-        <div className={`card ${props.className || ''}`}>{props.children}</div>
+        <div
+            style={props.style || {}}
+            className={`card ${props.className || ''}`}
+        >
+            {props.children}
+        </div>
     );
 };
