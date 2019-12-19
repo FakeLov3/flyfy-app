@@ -1,29 +1,34 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import { LoaderContext } from '../../config/context';
 import { Card, Button } from '../../components';
 import Icon from '@mdi/react';
-import { mdiMenuDown } from '@mdi/js';
+import { mdiMenuDown, mdiPencil } from '@mdi/js';
 
 export default ({ data }) => {
+    const { setLoader } = useContext(LoaderContext);
+
     return (
         <div className="main">
             <Card className="profile-info">
                 <Card
                     style={{
                         background: `url(${data.profilePic ||
-                            'https://www.pngtube.com/myfile/detail/274-2744813_man-user-man-comments-person-icon-png-red.png'}) no-repeat center center`,
+                            ''}) no-repeat center center`,
                         backgroundSize: 'contain',
                     }}
                     className="profile-pic"
-                ></Card>
+                >
+                    <Link to={`/dashboard/edit`}>
+                        <Button onClick={() => setLoader('active')}>
+                            <Icon path={mdiPencil} size={0.7} color="#ffffff" />
+                        </Button>
+                    </Link>
+                </Card>
                 <div className="profile-information">
                     <h1 className="name">{data.name}</h1>
                     <h1 className="user">@{data.user}</h1>
-                    <Button className="follow" label="Follow" />
-                    <p className="bio">
-                        Hello! My name is Gabriel and i'm a fullstack developer.
-                        Node, React.js, MySQL, Git and a lot of fun! I like to
-                        drink beer and i do it almost every day.
-                    </p>
+                    <p className="bio">{data.bio}</p>
                 </div>
             </Card>
             <Card className="profile-actions">

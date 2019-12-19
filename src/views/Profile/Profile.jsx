@@ -8,9 +8,11 @@ import './Profile.scss';
 export default props => {
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(true);
+    const { setLoader } = useContext(LoaderContext);
     const { user } = props.match.params;
 
     useEffect(() => {
+        setLoader('active');
         getUserData();
     }, []);
 
@@ -18,10 +20,12 @@ export default props => {
         api.get(`user/${user}`)
             .then(({ data }) => {
                 console.log(data);
+                setLoader('');
                 setLoading(false);
                 setData(data);
             })
             .catch(error => {
+                setLoader('');
                 setLoading(false);
                 console.error(error);
             });

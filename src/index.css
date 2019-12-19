@@ -55,3 +55,31 @@ input:-webkit-autofill:active {
     box-shadow: 0 0 0 30px white inset;
     -webkit-box-shadow: 0 0 0 30px white inset;
 }
+
+.react-crop {
+    pointer-events: none;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #00000030;
+    position: fixed;
+    transition: opacity 0.25s ease;
+}
+
+.react-crop.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.react-crop .cropper {
+    border-radius: 5px;
+    box-shadow: 0 1px 1px 1px #30303030;
+}
+
+.react-crop .btn {
+    margin: 12px;
+}

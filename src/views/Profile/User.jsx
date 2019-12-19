@@ -12,11 +12,14 @@ export default ({ data }) => {
                     <h1 className="name">{data.name}</h1>
                     <h1 className="user">@{data.user}</h1>
                     <Button className="follow" label="Follow" />
-                    <p className="bio">
-                        Hello! My name is Gabriel and i'm a fullstack developer.
-                        Node, React.js, MySQL, Git and a lot of fun! I like to
-                        drink beer and i do it almost every day.
-                    </p>
+                    {data.bio ? (
+                        <>
+                            <div className="grayline"></div>
+                            <p className="bio">{data.bio}</p>
+                        </>
+                    ) : (
+                        <></>
+                    )}
                 </div>
             </Card>
             <Card className="profile-actions">
@@ -40,16 +43,7 @@ export default ({ data }) => {
                         <p>following</p>
                     </div>
                 </div>
-                <div className="profile-feed">
-                    <Button>
-                        <Icon path={mdiAccount} size={0.7} color="#ffffff" />
-                        <p>Follow</p>
-                    </Button>
-                    <Button>
-                        <Icon path={mdiAccount} size={0.7} color="#ffffff" />
-                        <p>Send message</p>
-                    </Button>
-                </div>
+                <div className="profile-feed"></div>
             </Card>
         </div>
     );
