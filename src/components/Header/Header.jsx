@@ -2,27 +2,27 @@ import React from 'react';
 import { Input } from '../';
 import Icon from '@mdi/react';
 import { mdiDotsVertical, mdiMagnify } from '@mdi/js';
-import './Header.css';
+import './Header.scss';
 
 export default props => {
     return (
         <header className="header-nav">
-            <h1 className="logo">Flyfy</h1>
+            <h1 className="logo">flyfy</h1>
             <div className="menu">
                 <Input
-                    placeholder="Pesquisar"
+                    placeholder="Search anything..."
                     icon={
                         <Icon
-                            className="search-icon"
+                            className="icon search-icon"
                             path={mdiMagnify}
                             size={0.8}
-                            color="#303030"
+                            color="#ffffff"
                         />
                     }
                     className="search"
                 />
-                <div className="profile"></div>
-                <div className="more">
+                <div className="icon profile"></div>
+                <div className="icon more">
                     <Icon path={mdiDotsVertical} size={0.8} color="#ffffff" />
                 </div>
             </div>

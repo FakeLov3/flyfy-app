@@ -1,0 +1,119 @@
+.edit.view {
+    .main {
+        margin: 24px 0;
+        width: 100%;
+        display: flex;
+    }
+
+    .edit {
+        flex-direction: column;
+        justify-content: center;
+        background-color: #ffffff;
+        padding: 24px;
+        width: 100%;
+        height: auto;
+
+        .btn {
+            margin: 0 0 0 12px;
+
+            > * {
+                margin: 0 0 0 12px;
+            }
+        }
+
+        h1 {
+            font-family: 'Roboto';
+            font-weight: bold;
+            text-align: center;
+            margin: 0 0 24px;
+        }
+
+        p.label {
+            font-weight: bold;
+            margin: 12px 0;
+        }
+
+        .edit-profile-pic {
+            min-width: 300px;
+
+            p.label {
+                text-align: center;
+            }
+
+            .img-wrapper {
+                position: relative;
+
+                .profile-pic {
+                    padding: 0;
+                    margin: 0 auto 24px;
+                    width: 250px;
+                    height: 250px;
+                    border-radius: 5px;
+                    transition: opacity 0.25s ease;
+                }
+
+                .btn {
+                    position: absolute;
+                    bottom: 12px;
+                    left: 12px;
+                    margin: auto;
+                }
+            }
+        }
+
+        .edit-profile-info {
+            width: 100%;
+
+            form {
+                display: flex;
+                flex-direction: column;
+                height: auto;
+            }
+
+            .edit-wrapper {
+                padding: 0 0 0 24px;
+            }
+
+            .edit-input {
+                width: 100%;
+                border: 1px solid #303030;
+                box-sizing: border-box;
+                margin: 0 0 6px;
+
+                input {
+                    width: 100%;
+                    font-size: 12px;
+                }
+            }
+
+            .text {
+                margin: 0 0 12px 0;
+                min-height: 75px;
+                height: auto;
+                padding: 8px;
+                box-sizing: border-box;
+                border: 1px solid #303030;
+                border-radius: 5px;
+
+                textarea {
+                    font-size: 12px;
+                    width: 100%;
+                    min-height: 48px;
+                    padding: 0;
+                    box-sizing: border-box;
+                    resize: none;
+                    border: none;
+                }
+            }
+        }
+
+        .edit-footer {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+    }
+    .input-file {
+        display: none;
+    }
+}
