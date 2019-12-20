@@ -13,7 +13,10 @@ export default props => {
     const feedRef = useRef(null);
     const { limit, posts } = feed;
 
-    useEffect(() => getFeedPosts(), []);
+    useEffect(() => {
+        getFeedPosts();
+        // eslint-disable-next-line
+    }, []);
 
     const getFeedPosts = () => {
         setStatus('loading');

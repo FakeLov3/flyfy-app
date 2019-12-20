@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import ReactCrop from 'react-image-crop';
 import { Button } from '../../components';
 import Icon from '@mdi/react';
@@ -11,16 +11,7 @@ export default ({ data }) => {
 
     return (
         <div className={`react-crop${active ? ' active' : ''}`}>
-            <ReactCrop
-                className="cropper"
-                src={src}
-                crop={crop}
-                {...events}
-
-                // onImageLoaded={onImageLoaded}
-                // onComplete={onCropComplete}
-                // onChange={onCropChange}
-            />
+            <ReactCrop className="cropper" src={src} crop={crop} {...events} />
             <div className="actions">
                 <Button onClick={onFinish}>
                     Save

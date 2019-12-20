@@ -14,6 +14,7 @@ export default props => {
     useEffect(() => {
         setLoader('active');
         getUserData();
+        // eslint-disable-next-line
     }, []);
 
     const getUserData = () => {

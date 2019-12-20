@@ -5,6 +5,7 @@ import { Card, Button, Input } from '../../components';
 import TextareaAutosize from 'react-textarea-autosize';
 import Icon from '@mdi/react';
 import { mdiContentSave, mdiCancel, mdiPencil } from '@mdi/js';
+import noProfilePic from '../../assets/images/no-profile-pic.png';
 import './Edit.scss';
 
 export default props => {
@@ -12,6 +13,7 @@ export default props => {
     const [data, setData] = useState({});
     const [croppedURL, setCroppedURL] = useState(null);
     const [blob, setBlob] = useState(null);
+    const [profilePic, setProfilePic] = useState(null);
 
     const fileRef = useRef(null);
     const previewRef = useRef(null);
@@ -39,15 +41,32 @@ export default props => {
             onFinish: handleSaveProfilePic,
         }));
         getEditData();
+        // eslint-disable-next-line
     }, []);
 
     const getEditData = () => {
         api.get('getEditData')
             .then(({ data }) => {
-                setLoader('');
+                if (data.profilePic) {
+                    getProfilePic(data);
+                    return;
+                }
                 setData(data);
+                setLoader('');
             })
             .catch(() => setLoader(''));
+    };
+
+    const getProfilePic = userData => {
+        const { profilePic } = userData;
+        const path = profilePic.replace(/\//g, '_');
+        api.get(`/img/${path}`)
+            .then(({ data, headers }) => {
+                setProfilePic(`data:${headers['content-type']};base64,${data}`);
+                setData(userData);
+                setLoader('');
+            })
+            .catch(error => console.error(error));
     };
 
     const form = [
@@ -78,7 +97,7 @@ export default props => {
         })
             .then(response => {
                 console.log(response);
-                window.location.pathname = '/';
+                // window.location.pathname = '/';
             })
             .catch(() => setLoader(''));
     };
@@ -102,7 +121,6 @@ export default props => {
     };
 
     const onImageLoaded = image => {
-        console.log(image);
         setCropper(cropper => ({
             ...cropper,
             active: true,
@@ -174,9 +192,12 @@ export default props => {
                             <p className="label">Profile picture</p>
                             <div className="img-wrapper">
                                 <img
+                                    alt="preview-profile"
                                     ref={previewRef}
                                     className="card profile-pic"
-                                    src={croppedURL}
+                                    src={
+                                        croppedURL || profilePic || noProfilePic
+                                    }
                                 />
                                 <Button onClick={handleChangeProfilePicture}>
                                     Edit

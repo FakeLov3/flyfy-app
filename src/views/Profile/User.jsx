@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Button } from '../../components';
 import Icon from '@mdi/react';
-import { mdiMenuDown, mdiAccount } from '@mdi/js';
+import { mdiMenuDown } from '@mdi/js';
 
 export default ({ data }) => {
     return (
