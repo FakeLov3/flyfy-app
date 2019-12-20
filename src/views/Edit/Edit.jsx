@@ -13,7 +13,7 @@ export default props => {
     const [data, setData] = useState({});
     const [croppedURL, setCroppedURL] = useState(null);
     const [blob, setBlob] = useState(null);
-    const [profilePic, setProfilePic] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     const fileRef = useRef(null);
     const previewRef = useRef(null);
@@ -23,6 +23,7 @@ export default props => {
 
     useEffect(() => {
         setLoader('active');
+        setLoading(true);
         setCropper(cropper => ({
             ...cropper,
             crop: {
@@ -45,28 +46,16 @@ export default props => {
     }, []);
 
     const getEditData = () => {
-        api.get('getEditData')
+        api.get('/user?username=')
             .then(({ data }) => {
-                if (data.profilePic) {
-                    getProfilePic(data);
-                    return;
-                }
                 setData(data);
                 setLoader('');
+                setLoading(false);
             })
-            .catch(() => setLoader(''));
-    };
-
-    const getProfilePic = userData => {
-        const { profilePic } = userData;
-        const path = profilePic.replace(/\//g, '_');
-        api.get(`/img/${path}`)
-            .then(({ data, headers }) => {
-                setProfilePic(`data:${headers['content-type']};base64,${data}`);
-                setData(userData);
+            .catch(() => {
+                setLoading(true);
                 setLoader('');
-            })
-            .catch(error => console.error(error));
+            });
     };
 
     const form = [
@@ -95,10 +84,7 @@ export default props => {
                 'Content-Type': 'multipart/form-data',
             },
         })
-            .then(response => {
-                console.log(response);
-                // window.location.pathname = '/';
-            })
+            .then(() => window.location.reload())
             .catch(() => setLoader(''));
     };
 
@@ -192,11 +178,14 @@ export default props => {
                             <p className="label">Profile picture</p>
                             <div className="img-wrapper">
                                 <img
+                                    style={{ opacity: loading ? 0 : 1 }}
                                     alt="preview-profile"
                                     ref={previewRef}
                                     className="card profile-pic"
                                     src={
-                                        croppedURL || profilePic || noProfilePic
+                                        croppedURL ||
+                                        data.profilePic ||
+                                        noProfilePic
                                     }
                                 />
                                 <Button onClick={handleChangeProfilePicture}>

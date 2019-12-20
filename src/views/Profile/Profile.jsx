@@ -18,17 +18,15 @@ export default props => {
     }, []);
 
     const getUserData = () => {
-        api.get(`user/${user}`)
+        api.get(`user?username=${user}`)
             .then(({ data }) => {
-                console.log(data);
-                setLoader('');
-                setLoading(false);
                 setData(data);
-            })
-            .catch(error => {
                 setLoader('');
                 setLoading(false);
-                console.error(error);
+            })
+            .catch(() => {
+                setLoader('');
+                setLoading(false);
             });
     };
 

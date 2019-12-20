@@ -11,20 +11,18 @@ export default ({ data }) => {
     return (
         <div className="main">
             <Card className="profile-info">
-                <Card
-                    style={{
-                        background: `url(${data.profilePic ||
-                            ''}) no-repeat center center`,
-                        backgroundSize: 'contain',
-                    }}
-                    className="profile-pic"
-                >
+                <div className="profile-pic">
+                    <img
+                        alt="profile-img"
+                        className="profile-base64"
+                        src={data.profilePic}
+                    />
                     <Link to={`/dashboard/edit`}>
                         <Button onClick={() => setLoader('active')}>
                             <Icon path={mdiPencil} size={0.7} color="#ffffff" />
                         </Button>
                     </Link>
-                </Card>
+                </div>
                 <div className="profile-information">
                     <h1 className="name">{data.name}</h1>
                     <h1 className="user">@{data.user}</h1>

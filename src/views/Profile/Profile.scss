@@ -15,11 +15,26 @@
     }
 
     .profile-pic {
+        padding: 0;
+        position: relative;
         margin: 0 0 24px;
         width: 100%;
         height: 300px;
         border-radius: 5px 5px 0 0;
-        background-color: #303030;
+
+        .btn {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+        }
+
+        .profile-base64 {
+            max-width: 300px;
+            max-height: 300px;
+            width: 100%;
+            height: 100%;
+            border-radius: 5px 5px 0 0;
+        }
     }
 
     .profile-information {
