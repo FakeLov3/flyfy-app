@@ -44,16 +44,21 @@
         }
     }
 
+    .divider {
+        min-width: 1px;
+        height: 30px;
+        margin: 0 12px;
+        background-color: #505050;
+    }
+
     .icon {
         cursor: pointer;
         display: flex;
+        margin-left: 16px;
 
-        &.more {
-            margin-left: 6px;
-        }
-
-        &.bell {
-            margin-left: 12px;
+        &.more,
+        &.multiple {
+            margin-left: 0;
         }
     }
 

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { formatDate } from '../../services/formatters';
 import { Card } from '../';
 import api from '../../services/api';
@@ -27,6 +28,8 @@ export default ({ post }) => {
         liked
             ? reactions.length < 2
                 ? 'You liked this'
+                : reactions.length === 2
+                ? `You and another user liked this`
                 : `You and ${reactions.length - 1} people liked this`
             : reactions.length > 1
             ? `${reactions.length} likes`
@@ -53,14 +56,12 @@ export default ({ post }) => {
                     />
                 </div>
                 <div>
-                    <p
-                        onClick={() =>
-                            (window.location.pathname = `/dashboard/${post.user.user}`)
-                        }
-                        className="post-user"
+                    <Link
+                        style={{ color: '#303030' }}
+                        to={`/user/${post.user.user}`}
                     >
-                        {post.user.user}
-                    </p>
+                        <p className="post-user">{post.user.user}</p>
+                    </Link>
                     <p className="post-date info">
                         {formatDate(post.createdAt)}
                     </p>

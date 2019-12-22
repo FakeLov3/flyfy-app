@@ -19,14 +19,7 @@ export default ({ data }) => {
                     <h1 className="name">{data.name}</h1>
                     <h1 className="user">@{data.user}</h1>
                     <Button className="follow" label="Follow" />
-                    {data.bio ? (
-                        <>
-                            <div className="grayline"></div>
-                            <p className="bio">{data.bio}</p>
-                        </>
-                    ) : (
-                        <></>
-                    )}
+                    {data.bio ? <p className="bio">{data.bio}</p> : <></>}
                 </div>
             </Card>
             <Card className="profile-actions">

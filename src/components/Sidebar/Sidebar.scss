@@ -1,0 +1,25 @@
+.sidebar {
+    padding: 0;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    background-color: #404040;
+
+    .item {
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+        width: 56px;
+        height: 56px;
+        box-sizing: border-box;
+        transition: background-color 0.25s ease;
+
+        &:hover {
+            background-color: #303030;
+        }
+    }
+}

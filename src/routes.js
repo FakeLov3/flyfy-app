@@ -5,9 +5,9 @@ import { Dashboard, Join, SignIn } from './layouts';
 export default () => (
     <Router>
         <Switch>
-            <Route exact path="/" component={SignIn} />
+            <Route exact path="/signin" component={SignIn} />
             <Route exact path="/join" component={Join} />
-            <Route path="/dashboard" component={Dashboard} />
+            <Route path="/" component={Dashboard} />
         </Switch>
     </Router>
 );
