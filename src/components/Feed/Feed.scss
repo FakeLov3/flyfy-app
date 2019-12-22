@@ -63,11 +63,18 @@
     }
 
     .post {
+        pointer-events: all;
         width: auto;
         height: 250px;
         background-color: #fafafa;
         padding: 0;
         flex-direction: column;
+        transition: opacity 0.25s ease;
+
+        // &.loading {
+        //     opacity: 0;
+        //     pointer-events: none;
+        // }
 
         .profile,
         .post-content,
@@ -95,6 +102,13 @@
                 height: 32px;
                 border-radius: 50%;
                 background-color: #303030;
+
+                img {
+                    width: 32px;
+                    height: 32px;
+                    border-radius: 50%;
+                    box-shadow: 0 1px 2px 0.5px #30303050;
+                }
             }
 
             .post-user {
@@ -112,12 +126,22 @@
 
         .post-status {
             display: flex;
-            padding: 8px 12px 0;
+            padding: 12px 12px 0;
             box-sizing: border-box;
             justify-content: space-between;
         }
 
+        .grayline {
+            width: auto;
+            min-height: 1px;
+            margin: 12px;
+            box-sizing: border-box;
+            background-color: #cccccc;
+        }
+
         .post-footer {
+            padding-top: 0;
+
             .action {
                 cursor: pointer;
                 margin: 0 12px 0 0;

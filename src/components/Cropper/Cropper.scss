@@ -25,6 +25,11 @@
         max-width: 70%;
         border-radius: 5px;
         box-shadow: 0 1px 1px 1px #30303030;
+
+        .ReactCrop__image {
+            max-height: 600px;
+            height: 100%;
+        }
     }
 
     .btn {

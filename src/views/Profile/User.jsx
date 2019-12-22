@@ -1,13 +1,20 @@
 import React from 'react';
 import { Card, Button } from '../../components';
 import Icon from '@mdi/react';
+import noProfilePic from '../../assets/images/no-profile-pic.png';
 import { mdiMenuDown } from '@mdi/js';
 
 export default ({ data }) => {
     return (
         <div className="main">
             <Card className="profile-info">
-                <Card className="profile-pic" />
+                <div className="profile-pic">
+                    <img
+                        alt="profile-img"
+                        className="profile-base64"
+                        src={data.profilePic || noProfilePic}
+                    />
+                </div>
                 <div className="profile-information">
                     <h1 className="name">{data.name}</h1>
                     <h1 className="user">@{data.user}</h1>

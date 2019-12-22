@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { LoaderContext } from '../../config/context';
 import { Card, Button } from '../../components';
 import Icon from '@mdi/react';
+import noProfilePic from '../../assets/images/no-profile-pic.png';
 import { mdiMenuDown, mdiPencil } from '@mdi/js';
 
 export default ({ data }) => {
@@ -15,7 +16,7 @@ export default ({ data }) => {
                     <img
                         alt="profile-img"
                         className="profile-base64"
-                        src={data.profilePic}
+                        src={data.profilePic || noProfilePic}
                     />
                     <Link to={`/dashboard/edit`}>
                         <Button onClick={() => setLoader('active')}>

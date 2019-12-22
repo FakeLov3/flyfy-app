@@ -3,12 +3,14 @@ import { formatDate } from '../../services/formatters';
 import { Card } from '../';
 import api from '../../services/api';
 import Icon from '@mdi/react';
+import noProfilePic from '../../assets/images/no-profile-pic.png';
 import { mdiThumbUp, mdiThumbUpOutline, mdiMessageOutline } from '@mdi/js';
 
 export default ({ post }) => {
     const [liked, setLiked] = useState(post.liked);
     const [reactions, setReactions] = useState(post.reactions || []);
     const [comments /*, setComments*/] = useState(post.comments || []);
+    const [loading, setLoading] = useState(true);
 
     const handlePostLike = post => {
         api.post('/likePost', { post })
@@ -19,9 +21,7 @@ export default ({ post }) => {
             .catch(error => console.error(error));
     };
 
-    const handleUserProfileClick = user => {
-        console.log(user);
-    };
+    const handleUserProfileClick = user => {};
 
     const likedString = `${
         liked
@@ -36,12 +36,22 @@ export default ({ post }) => {
     } `;
 
     return (
-        <Card className="post">
+        <Card className={`post${loading ? ' loading' : ''}`}>
             <div className="profile">
                 <div
                     onClick={() => handleUserProfileClick(post.user)}
                     className="profile-pic"
-                ></div>
+                >
+                    <img
+                        src={
+                            post.user.profilePic
+                                ? `${process.env.REACT_APP_API}/img?w=32&h=32&key=${post.user.profilePic}`
+                                : noProfilePic
+                        }
+                        alt="profile-pic"
+                        onLoad={() => setLoading(false)}
+                    />
+                </div>
                 <div>
                     <p
                         onClick={() =>
@@ -67,6 +77,7 @@ export default ({ post }) => {
                         : `${comments.length} comments`}
                 </p>
             </div>
+            <div className="grayline"></div>
             <div className="post-footer">
                 <div className="action" onClick={() => handlePostLike(post.id)}>
                     <Icon

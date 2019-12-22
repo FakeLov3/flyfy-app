@@ -32,7 +32,9 @@ const formatDate = dateTime => {
                     ? hoursDiff > 23
                         ? `${months[month - 1]}, ${
                               day < 10 ? `0${day}` : day
-                          } at ${hours}:${minutes}`
+                          } at ${hours < 10 ? `0${hours}` : hours}:${
+                              minutes < 10 ? `0${minutes}` : minutes
+                          }`
                         : `${parseInt(hoursDiff)} h`
                     : `${parseInt(minutesDiff)} min`
                 : `${parseInt(secondsDiff)} seconds ago`

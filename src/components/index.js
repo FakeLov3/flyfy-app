@@ -4,6 +4,7 @@ import Card from './Card/Card';
 import Checkbox from './Checkbox/Checkbox';
 import CreatePost from './CreatePost/CreatePost';
 import Cropper from './Cropper/Cropper';
+import Dropdown from './Dropdown/Dropdown';
 import Feed from './Feed/Feed';
 import Friends from './Friends/Friends';
 import SignInButton from './Google/SignInButton';
@@ -21,6 +22,7 @@ export {
     Checkbox,
     CreatePost,
     Cropper,
+    Dropdown,
     Feed,
     Friends,
     SignInButton,
