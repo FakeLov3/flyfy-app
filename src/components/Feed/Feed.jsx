@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext, useRef } from 'react';
 import { FeedContext } from '../../config/context';
 import api from '../../services/api';
-import { CreatePost } from '../';
+import { Bar, CreatePost, Suggestions } from '../';
 import Posts from './Posts';
 import './Feed.scss';
 
@@ -42,15 +42,18 @@ export default props => {
     };
 
     return (
-        <div
-            onScroll={() => !overload && handleFeedScroll()}
-            className="feed view"
-            ref={feedRef}
-        >
-            <main className="main">
-                <CreatePost />
-                <Posts posts={posts} status={status} overload={overload} />
-            </main>
-        </div>
+        <>
+            <Suggestions />
+            <div
+                onScroll={() => !overload && handleFeedScroll()}
+                className="feed view"
+                ref={feedRef}
+            >
+                <main className="main">
+                    <CreatePost />
+                    <Posts posts={posts} status={status} overload={overload} />
+                </main>
+            </div>
+        </>
     );
 };

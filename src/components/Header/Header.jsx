@@ -22,6 +22,7 @@ export default ({ data }) => {
     const dropdownItems = [
         {
             name: 'Sign out',
+            onClick: () => console.log('meu irmao'),
         },
     ];
 
