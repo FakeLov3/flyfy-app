@@ -4,10 +4,12 @@ import './Suggestions.scss';
 
 export default props => {
     return (
-        <Bar className="suggestions">
-            <Card>
-                <p>Opa</p>
-            </Card>
+        <Bar className="suggestions-wrapper">
+            <div className="suggestions">
+                <Card>
+                    <p>Opa</p>
+                </Card>
+            </div>
         </Bar>
     );
 };

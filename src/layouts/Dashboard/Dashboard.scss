@@ -18,8 +18,10 @@
     .content {
         display: flex;
         justify-content: space-between;
+        position: absolute;
         width: 100%;
-        height: 100%;
+        height: auto;
+        margin: 56px 0 0 0;
     }
 
     .tooltip {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
 import { Switch, Route } from 'react-router-dom';
-import { Header, Sidebar, Bar } from '../../components';
+import { Header, Sidebar } from '../../components';
 import { Feed, Profile, Edit } from '../../views';
 import './Dashboard.scss';
 

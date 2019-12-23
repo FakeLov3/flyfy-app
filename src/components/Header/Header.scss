@@ -1,8 +1,9 @@
 .header-nav {
+    z-index: 1;
     width: 100%;
     height: auto;
     background-color: #303030;
-    position: relative;
+    position: fixed;
     display: flex;
     align-items: center;
     justify-content: space-between;

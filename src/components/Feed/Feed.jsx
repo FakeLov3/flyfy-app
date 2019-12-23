@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext, useRef } from 'react';
 import { FeedContext } from '../../config/context';
 import api from '../../services/api';
-import { Bar, CreatePost, Suggestions } from '../';
+import { CreatePost, Suggestions } from '../';
 import Posts from './Posts';
 import './Feed.scss';
 
@@ -35,25 +35,22 @@ export default props => {
             .catch(() => setStatus('error'));
     };
 
-    const handleFeedScroll = () => {
-        let { scrollTop, scrollHeight, offsetHeight } = feedRef.current;
-        let bottom = scrollHeight - offsetHeight - 50;
-        scrollTop >= bottom && status !== 'loading' && getFeedPosts();
-    };
+    const handleFeedScroll = () =>
+        window.scrollY + window.innerHeight > feedRef.current.scrollHeight &&
+        status !== 'loading' &&
+        getFeedPosts();
+
+    window.onscroll = () => !overload && handleFeedScroll();
 
     return (
         <>
-            <Suggestions />
-            <div
-                onScroll={() => !overload && handleFeedScroll()}
-                className="feed view"
-                ref={feedRef}
-            >
+            <div className="feed view" ref={feedRef}>
                 <main className="main">
                     <CreatePost />
                     <Posts posts={posts} status={status} overload={overload} />
                 </main>
             </div>
+            <Suggestions />
         </>
     );
 };
