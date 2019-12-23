@@ -21,7 +21,7 @@
 body {
     margin: 0;
     overflow: hidden;
-    overflow-y: auto;
+    overflow-y: scroll;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }

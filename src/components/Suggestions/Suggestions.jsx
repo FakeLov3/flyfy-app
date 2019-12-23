@@ -6,7 +6,10 @@ export default props => {
     return (
         <Bar className="suggestions-wrapper">
             <div className="suggestions">
-                <Card>
+                <Card className="suggested-user">
+                    <p>Opa</p>
+                </Card>
+                <Card className="suggested-user">
                     <p>Opa</p>
                 </Card>
             </div>

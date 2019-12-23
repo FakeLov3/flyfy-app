@@ -6,6 +6,7 @@ import CreatePost from './CreatePost/CreatePost';
 import Cropper from './Cropper/Cropper';
 import Dropdown from './Dropdown/Dropdown';
 import Feed from './Feed/Feed';
+import Friends from './Friends/Friends';
 import SignInButton from './Google/SignInButton';
 import Header from './Header/Header';
 import Input from './Input/IconInput';
@@ -25,6 +26,7 @@ export {
     Cropper,
     Dropdown,
     Feed,
+    Friends,
     SignInButton,
     Header,
     Input,

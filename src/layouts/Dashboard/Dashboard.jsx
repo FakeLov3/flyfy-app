@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
 import { Switch, Route } from 'react-router-dom';
-import { Header, Sidebar } from '../../components';
+import { Header, Sidebar, Friends } from '../../components';
 import { Feed, Profile, Edit } from '../../views';
 import './Dashboard.scss';
 
@@ -18,12 +18,13 @@ export default props => {
         <div className="layout dashboard">
             <Header data={data} />
             <div className="content">
-                <Sidebar />
+                <Sidebar data={data} />
                 <Switch>
                     <Route exact path="/" component={Feed} />
                     <Route exact path="/settings" component={Edit} />
                     <Route exact path="/user/:user" component={Profile} />
                 </Switch>
+                <Friends />
             </div>
         </div>
     );
