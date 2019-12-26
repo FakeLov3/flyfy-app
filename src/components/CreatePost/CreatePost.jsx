@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef, useEffect } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 import { FeedContext, LoaderContext } from '../../config/context';
 import TextareaAutosize from 'react-textarea-autosize';
 import api from '../../services/api';

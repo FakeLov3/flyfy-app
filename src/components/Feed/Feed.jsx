@@ -7,16 +7,17 @@ import './Feed.scss';
 
 export default props => {
     const [offset, setOffset] = useState(0);
-    const [overload, setOverload] = useState(false);
     const [feed, setFeed] = useContext(FeedContext);
-    const [status, setStatus] = useState('loading');
+    const [status, setStatus] = useState('oxe');
+
     const feedRef = useRef(null);
+    const overload = useRef(false);
+
     const { limit, posts } = feed;
 
     useEffect(() => {
         getFeedPosts();
-        window.addEventListener('scroll', handleWindowScroll);
-        return () => window.removeEventListener('scroll', handleWindowScroll);
+        return () => (window.onscroll = null);
         // eslint-disable-next-line
     }, []);
 
@@ -25,7 +26,7 @@ export default props => {
         api.get(`/feed/${offset}`)
             .then(({ data }) => {
                 setStatus('success');
-                setOverload(data.length < limit || data.length === 0);
+                overload.current = data.length < limit || data.length === 0;
                 if (data.length > 0) {
                     setOffset(offset => offset + limit);
                     setFeed(feed => ({
@@ -42,14 +43,18 @@ export default props => {
         status !== 'loading' &&
         getFeedPosts();
 
-    const handleWindowScroll = () => !overload && handleFeedScroll();
+    window.onscroll = () => !overload.current && handleFeedScroll();
 
     return (
         <>
             <div className="feed view" ref={feedRef}>
                 <main className="main">
                     <CreatePost />
-                    <Posts posts={posts} status={status} overload={overload} />
+                    <Posts
+                        posts={posts}
+                        status={status}
+                        overload={overload.current}
+                    />
                 </main>
             </div>
             <Suggestions />
