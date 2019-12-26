@@ -25,6 +25,7 @@ export default props => {
         setStatus('loading');
         api.get(`/feed/${offset}`)
             .then(({ data }) => {
+                console.log(data);
                 setStatus('success');
                 overload.current = data.length < limit || data.length === 0;
                 if (data.length > 0) {

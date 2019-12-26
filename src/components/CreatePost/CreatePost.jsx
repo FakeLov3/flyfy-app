@@ -86,7 +86,12 @@ export default props => {
                 </div>
                 <div className="preview-wrapper">
                     {previewFiles.map((preview, i) => (
-                        <img className="preview" key={i} src={preview.file} />
+                        <img
+                            alt="preview"
+                            className="preview"
+                            key={i}
+                            src={preview.file}
+                        />
                     ))}
                 </div>
                 <div className="action">

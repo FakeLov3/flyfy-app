@@ -27,9 +27,9 @@ const formatDate = dateTime => {
 
     return `${
         secondsDiff > 10
-            ? secondsDiff > 59
-                ? minutesDiff > 59
-                    ? hoursDiff > 23
+            ? secondsDiff > 59.9
+                ? minutesDiff > 59.9
+                    ? hoursDiff > 23.9
                         ? `${months[month - 1]}, ${
                               day < 10 ? `0${day}` : day
                           } at ${hours < 10 ? `0${hours}` : hours}:${

@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { LoaderContext } from '../../config/context';
-import Account from './Account';
 import User from './User';
 import api from '../../services/api';
 import './Profile.scss';
@@ -31,16 +30,6 @@ export default props => {
     };
 
     return (
-        <div className="profile view">
-            {!loading ? (
-                data.isUser ? (
-                    <Account data={data} />
-                ) : (
-                    <User data={data} />
-                )
-            ) : (
-                <></>
-            )}
-        </div>
+        <div className="profile view">{!loading && <User data={data} />}</div>
     );
 };
