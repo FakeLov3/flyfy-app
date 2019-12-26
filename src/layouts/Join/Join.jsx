@@ -100,7 +100,7 @@ export default props => {
             api
                 .post('/createUser', { ...inputs })
                 .then(() => {
-                    window.location.pathname = '/';
+                    window.location.pathname = '/signin';
                 })
                 .catch(error => setLoader(''));
     };

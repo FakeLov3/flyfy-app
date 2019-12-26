@@ -8,6 +8,7 @@ import { mdiMenuDown, mdiPencil } from '@mdi/js';
 
 export default ({ data }) => {
     const { setLoader } = useContext(LoaderContext);
+    const postCount = data.posts[0].count;
 
     return (
         <div className="main">
@@ -18,7 +19,7 @@ export default ({ data }) => {
                         className="profile-base64"
                         src={data.profilePic || noProfilePic}
                     />
-                    <Link to={`/dashboard/edit`}>
+                    <Link to={`/settings`}>
                         <Button onClick={() => setLoader('active')}>
                             <Icon path={mdiPencil} size={0.7} color="#ffffff" />
                         </Button>
@@ -37,17 +38,21 @@ export default ({ data }) => {
                 </div>
                 <div className="profile-stats">
                     <div className="wrapper">
-                        <h1>320</h1>
-                        <p>posts</p>
+                        <h1>{postCount}</h1>
+                        <p>{postCount === 1 ? 'post' : 'posts'}</p>
                     </div>
                     <div className="grayline"></div>
                     <div className="wrapper">
-                        <h1>1230</h1>
-                        <p>followers</p>
+                        <h1>{data.followedBy.length}</h1>
+                        <p>
+                            {data.followedBy.length === 1
+                                ? 'follower'
+                                : 'followers'}
+                        </p>
                     </div>
                     <div className="grayline"></div>
                     <div className="wrapper">
-                        <h1>30</h1>
+                        <h1>{data.follows.length}</h1>
                         <p>following</p>
                     </div>
                 </div>

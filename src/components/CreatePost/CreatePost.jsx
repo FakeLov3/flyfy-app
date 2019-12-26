@@ -21,27 +21,45 @@ export default props => {
 
     const handleNewPost = () => {
         setLoader('active');
-        api.post('/createPost', { text })
-            .then(({ data }) => {
-                setFeed(feed => ({ ...feed, posts: [...data, ...posts] }));
-                setLoader('');
-            })
-            .catch(error => setLoader(''));
-    };
+        setText('');
+        setFiles([]);
+        setPreviewFiles([]);
 
-    const handleSelectPicture = () => fileRef.current.click();
+        const formData = new FormData();
+        formData.append('text', text);
+        files.forEach((file, i) => formData.append(`files[${i}]`, file));
+
+        api.post('/createPost', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        })
+            .then(({ data }) => {
+                setFeed(feed => ({
+                    ...feed,
+                    posts: [...data, ...posts],
+                }));
+            })
+            .catch(error => console.error(error))
+            .finally(() => setLoader(''));
+    };
 
     const handleOnChangeFile = ({ target }) => {
         for (let i = 0; i < target.files.length; i++) {
-            setFiles(files => [...files, target.files[i]]);
-            const reader = new FileReader();
-            reader.onload = event => {
-                setPreviewFiles(previewFiles => [
-                    ...previewFiles,
-                    { file: event.target.result },
-                ]);
-            };
-            reader.readAsDataURL(target.files[i]);
+            const hasFile = files.some(
+                file => target.files[i].name === file.name
+            );
+            if (!hasFile) {
+                setFiles(files => [...files, target.files[i]]);
+                const reader = new FileReader();
+                reader.onload = event => {
+                    setPreviewFiles(previewFiles => [
+                        ...previewFiles,
+                        { file: event.target.result },
+                    ]);
+                };
+                reader.readAsDataURL(target.files[i]);
+            }
         }
     };
 
@@ -55,13 +73,16 @@ export default props => {
                     !previewFiles.length > 0 ? ' has-no-files' : ''
                 }`}
             >
-                <div className="text">
-                    <TextareaAutosize
-                        onChange={event => setText(event.target.value)}
-                        spellCheck="false"
-                        draggable="false"
-                        placeholder="Share it to the world!"
-                    ></TextareaAutosize>
+                <div style={{ padding: '12px 12px 0' }}>
+                    <div className="text">
+                        <TextareaAutosize
+                            value={text}
+                            onChange={event => setText(event.target.value)}
+                            spellCheck="false"
+                            draggable="false"
+                            placeholder="Share it to the world!"
+                        ></TextareaAutosize>
+                    </div>
                 </div>
                 <div className="preview-wrapper">
                     {previewFiles.map((preview, i) => (
@@ -69,7 +90,7 @@ export default props => {
                     ))}
                 </div>
                 <div className="action">
-                    <Button onClick={handleSelectPicture}>
+                    <Button onClick={() => fileRef.current.click()}>
                         <Icon path={mdiFileImage} size={0.7} color="#ffffff" />
                         <p>Picture</p>
                     </Button>

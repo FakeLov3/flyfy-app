@@ -15,6 +15,8 @@ export default props => {
 
     useEffect(() => {
         getFeedPosts();
+        window.addEventListener('scroll', handleWindowScroll);
+        return () => window.removeEventListener('scroll', handleWindowScroll);
         // eslint-disable-next-line
     }, []);
 
@@ -40,7 +42,7 @@ export default props => {
         status !== 'loading' &&
         getFeedPosts();
 
-    window.onscroll = () => !overload && handleFeedScroll();
+    const handleWindowScroll = () => !overload && handleFeedScroll();
 
     return (
         <>

@@ -20,11 +20,11 @@ export default props => {
     const getUserData = () => {
         api.get(`user?username=${user}`)
             .then(({ data }) => {
+                console.log(data);
                 setData(data);
-                setLoader('');
-                setLoading(false);
             })
-            .catch(() => {
+            .catch(error => console.error(error))
+            .finally(() => {
                 setLoader('');
                 setLoading(false);
             });

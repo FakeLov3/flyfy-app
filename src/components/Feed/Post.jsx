@@ -6,6 +6,8 @@ import api from '../../services/api';
 import Icon from '@mdi/react';
 import noProfilePic from '../../assets/images/no-profile-pic.png';
 import { mdiThumbUp, mdiThumbUpOutline, mdiMessageOutline } from '@mdi/js';
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 export default ({ post }) => {
     const [liked, setLiked] = useState(post.liked);
@@ -68,7 +70,32 @@ export default ({ post }) => {
                 </div>
             </div>
             <div className="post-content">
-                <p className="post-text">{post.text}</p>
+                {post.text.length > 0 && (
+                    <p className="post-text">{post.text}</p>
+                )}
+                {post.images.length > 0 && (
+                    <div className="post-images">
+                        <Carousel
+                            showIndicators={post.images.length > 1}
+                            showStatus={post.images.length > 1}
+                            showThumbs={false}
+                            emulateTouch
+                            swipeScrollTolerance={10}
+                            statusFormatter={(current, total) =>
+                                `${current} / ${total}`
+                            }
+                        >
+                            {post.images.map((key, i) => (
+                                <div key={i} className="image">
+                                    <img
+                                        src={`${process.env.REACT_APP_API}/img?w=580&key=${key.image}`}
+                                        alt={`post-${i}`}
+                                    />
+                                </div>
+                            ))}
+                        </Carousel>
+                    </div>
+                )}
             </div>
             <div className="post-status">
                 <p>{likedString}</p>

@@ -57,14 +57,3 @@ input:-webkit-autofill:active {
     box-shadow: 0 0 0 30px white inset;
     -webkit-box-shadow: 0 0 0 30px white inset;
 }
-
-.dark {
-    background-color: #30303030;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.25s ease;
-}
-
-.dark.active {
-    opacity: 1;
-}

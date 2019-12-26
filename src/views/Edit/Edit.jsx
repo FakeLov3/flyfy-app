@@ -79,7 +79,7 @@ export default props => {
         Object.keys(inputs).forEach(key => formData.append(key, inputs[key]));
         blob && formData.append('blob', blob);
 
-        api.post('/updatedProfileInfo', formData, {
+        api.post('/updateProfileInfo', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },

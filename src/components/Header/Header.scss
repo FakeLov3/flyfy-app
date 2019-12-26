@@ -43,6 +43,10 @@
             font-size: 12px;
             background-color: #505050;
             color: #ffffff;
+
+            &::placeholder {
+                color: #cccccc;
+            }
         }
     }
 

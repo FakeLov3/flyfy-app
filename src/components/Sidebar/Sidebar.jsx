@@ -31,7 +31,7 @@ export default ({ data }) => {
 
     return (
         <Bar className="sidebar">
-            <Link to={'#'} className="profile-item item">
+            <Link to={`/user/${data.user}`} className="profile-item item">
                 <img
                     src={data.profilePic || noProfilePic}
                     alt="profile"

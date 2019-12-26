@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import ReactTooltip from 'react-tooltip';
 import { Input, Dropdown } from '../';
 import Icon from '@mdi/react';
@@ -30,7 +31,9 @@ export default ({ data }) => {
         <>
             <ReactTooltip className="tooltip" place="bottom" effect="solid" />
             <header className="header-nav">
-                <h1 className="logo">flyfy</h1>
+                <Link to={'/'} className="logo">
+                    <h1>flyfy</h1>
+                </Link>
                 <div className="menu">
                     <Input
                         placeholder="Search anything..."

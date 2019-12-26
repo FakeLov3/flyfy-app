@@ -16,7 +16,7 @@ export default () => {
         api.post('/auth', { ...inputs, remember })
             .then(({ data }) => {
                 localStorage.token = data.token;
-                window.location.pathname = '/dashboard';
+                window.location.pathname = '/';
             })
             .catch(error => {
                 setLoader('');
