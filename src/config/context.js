@@ -4,5 +4,12 @@ const LoaderContext = createContext();
 const FeedContext = createContext();
 const ModalContext = createContext();
 const CropperContext = createContext();
+const ChatContext = createContext();
 
-export { LoaderContext, FeedContext, ModalContext, CropperContext };
+export {
+    LoaderContext,
+    FeedContext,
+    ModalContext,
+    CropperContext,
+    ChatContext,
+};

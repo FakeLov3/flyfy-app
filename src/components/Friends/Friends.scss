@@ -41,6 +41,16 @@
     }
 
     .friends-list {
+        .label {
+            padding: 12px;
+        }
+
+        .divider {
+            width: 100%;
+            min-height: 1px;
+            background-color: #303030;
+        }
+
         .item {
             cursor: pointer;
             display: flex;

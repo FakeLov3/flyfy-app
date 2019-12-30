@@ -7,20 +7,24 @@ import { mdiMagnify } from '@mdi/js';
 import './Friends.scss';
 
 export default props => {
-    const [friends, setFriends] = useState([]);
+    const [data, setData] = useState({
+        followers: [],
+        rooms: [],
+    });
 
     useEffect(() => {
         api.get('/friends')
-            .then(({ data }) => setFriends(data))
-            .catch(error => {
-                console.error(error);
-            });
+            .then(({ data }) => {
+                console.log(data);
+                setData(data);
+            })
+            .catch(error => console.error(error));
     }, []);
 
     return (
         <Bar className="friends-wrapper">
             <div className="friends">
-                <FriendsList friends={friends} />
+                <FriendsList data={data} />
                 <Input
                     placeholder="Find a flyer..."
                     icon={
