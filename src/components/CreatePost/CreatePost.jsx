@@ -81,7 +81,7 @@ export default props => {
                             spellCheck="false"
                             draggable="false"
                             placeholder="Share it to the world!"
-                        ></TextareaAutosize>
+                        />
                     </div>
                 </div>
                 <div className="preview-wrapper">
