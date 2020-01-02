@@ -5,8 +5,7 @@ import './Chat.scss';
 
 export default props => {
     const [connected, setConnected] = useState(false);
-    const [message, setMessage] = useState('');
-    const [messages, setMessages] = useState([]);
+    const [messages, setMessages] = useState({});
     const [client, setClient] = useState(null);
     const { openRooms } = useContext(ChatContext);
 
@@ -18,51 +17,34 @@ export default props => {
         wss.onclose = () => setConnected(false);
         wss.onerror = error => {
             console.log(`WebSocket error: ${error}`);
+            setConnected(false);
         };
         wss.onmessage = event => handleReceiveMessage(event);
         setClient(wss);
     }, []);
 
-    const handleSendMessage = () => {
-        const data = {
-            type: 'message',
-            to: 9,
-            content: {
-                message,
-            },
-        };
-        setMessage('');
-        connected && client.send(JSON.stringify(data));
-    };
-
     const handleReceiveMessage = event => {
         const data = JSON.parse(event.data);
-        switch (data.type) {
-            case 'message':
-                setMessages(messages => [...messages, data]);
-                break;
-            case 'connection':
-                setConnected(true);
-                break;
-            default:
-                break;
-        }
-        console.log(data);
+        (() =>
+            ({
+                message: () =>
+                    setMessages(messages => ({
+                        ...messages,
+                        [data.to]: [...(messages[data.to] || []), data],
+                    })),
+                connection: () => setConnected(true),
+            }[data.type]))().call();
     };
 
-    return (
-        <>
-            {openRooms.map((room, i) => (
-                <ChatWindow
-                    key={i}
-                    room={room}
-                    client={client}
-                    send={handleSendMessage}
-                    receive={handleReceiveMessage}
-                    message={{ message, setMessage }}
-                    messages={messages}
-                />
-            ))}
-        </>
-    );
+    return openRooms.map((room, i) => (
+        <ChatWindow
+            key={i}
+            connected={connected}
+            room={room}
+            position={(i + 1) * 325 - 100}
+            client={client}
+            receive={handleReceiveMessage}
+            messages={messages[room.room]}
+        />
+    ));
 };

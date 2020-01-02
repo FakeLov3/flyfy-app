@@ -15,6 +15,7 @@ export default ({ data }) => {
             {
                 type: 'connection',
                 room: room.id,
+                name: room.name,
             },
         ]);
     };
@@ -50,7 +51,16 @@ export default ({ data }) => {
                     key={i}
                     onClick={() => handleRoomClick(room)}
                     className="profile-item item"
-                ></div>
+                >
+                    <img
+                        src={noProfilePic}
+                        alt="profile"
+                        className="profile-icon item-icon"
+                    ></img>
+                    <p className="profile-name item-name">
+                        {room.name || room.id}
+                    </p>
+                </div>
             ))}
         </div>
     );
