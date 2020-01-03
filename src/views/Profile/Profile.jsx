@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { LoaderContext } from '../../config/context';
-import Account from './Account';
 import User from './User';
 import api from '../../services/api';
 import './Profile.scss';
@@ -20,27 +19,17 @@ export default props => {
     const getUserData = () => {
         api.get(`user?username=${user}`)
             .then(({ data }) => {
+                console.log(data);
                 setData(data);
-                setLoader('');
-                setLoading(false);
             })
-            .catch(() => {
+            .catch(error => console.error(error))
+            .finally(() => {
                 setLoader('');
                 setLoading(false);
             });
     };
 
     return (
-        <div className="profile view">
-            {!loading ? (
-                data.isUser ? (
-                    <Account data={data} />
-                ) : (
-                    <User data={data} />
-                )
-            ) : (
-                <></>
-            )}
-        </div>
+        <div className="profile view">{!loading && <User data={data} />}</div>
     );
 };

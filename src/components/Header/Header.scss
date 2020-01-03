@@ -1,12 +1,15 @@
 .header-nav {
+    z-index: 1;
     width: 100%;
     height: auto;
     background-color: #303030;
+    position: fixed;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 8px 12px;
+    padding: 12px 20%;
     box-sizing: border-box;
+    box-shadow: 0 1px 2px 0.5px #30303050;
 
     .menu,
     .more {
@@ -17,11 +20,18 @@
         align-items: center;
     }
 
-    .profile {
-        width: 26px;
-        height: 26px;
-        background-color: #ffffff;
+    .profile-pic {
+        cursor: pointer;
+        width: auto;
+        display: flex;
         border-radius: 50%;
+
+        img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            box-shadow: 0 1px 2px 0.5px #30303050;
+        }
     }
 
     .search {
@@ -33,20 +43,41 @@
             font-size: 12px;
             background-color: #505050;
             color: #ffffff;
+
+            &::placeholder {
+                color: #cccccc;
+            }
         }
+    }
+
+    .divider {
+        min-width: 1px;
+        height: 30px;
+        margin: 0 12px;
+        background-color: #505050;
     }
 
     .icon {
         cursor: pointer;
-    }
+        display: flex;
+        margin-left: 16px;
+        border-radius: 50%;
 
-    .more {
-        margin-left: 6px;
+        &.more,
+        &.multiple {
+            margin-left: 0;
+        }
+
+        &.more:hover {
+            box-shadow: 0 0 0px 3px #505050;
+            background-color: #505050;
+        }
     }
 
     .search-icon {
         border-radius: 50%;
         padding: 2.5px;
+        padding-left: 4px;
         transition: background-color 0.25s ease;
 
         :hover {

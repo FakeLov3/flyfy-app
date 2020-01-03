@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { formatDate } from '../../services/formatters';
 import { Card } from '../';
 import api from '../../services/api';
 import Icon from '@mdi/react';
+import noProfilePic from '../../assets/images/no-profile-pic.png';
 import { mdiThumbUp, mdiThumbUpOutline, mdiMessageOutline } from '@mdi/js';
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 export default ({ post }) => {
     const [liked, setLiked] = useState(post.liked);
     const [reactions, setReactions] = useState(post.reactions || []);
     const [comments /*, setComments*/] = useState(post.comments || []);
+    const [loading, setLoading] = useState(true);
 
     const handlePostLike = post => {
         api.post('/likePost', { post })
@@ -19,14 +24,14 @@ export default ({ post }) => {
             .catch(error => console.error(error));
     };
 
-    const handleUserProfileClick = user => {
-        console.log(user);
-    };
+    const handleUserProfileClick = user => {};
 
     const likedString = `${
         liked
             ? reactions.length < 2
                 ? 'You liked this'
+                : reactions.length === 2
+                ? `You and another user liked this`
                 : `You and ${reactions.length - 1} people liked this`
             : reactions.length > 1
             ? `${reactions.length} likes`
@@ -36,28 +41,61 @@ export default ({ post }) => {
     } `;
 
     return (
-        <Card className="post">
+        <Card className={`post${loading ? ' loading' : ''}`}>
             <div className="profile">
                 <div
                     onClick={() => handleUserProfileClick(post.user)}
                     className="profile-pic"
-                ></div>
-                <div>
-                    <p
-                        onClick={() =>
-                            (window.location.pathname = `/dashboard/${post.user.user}`)
+                >
+                    <img
+                        src={
+                            post.user.profilePic
+                                ? `${process.env.REACT_APP_API}/img?w=32&h=32&key=${post.user.profilePic}`
+                                : noProfilePic
                         }
-                        className="post-user"
+                        alt="profile-pic"
+                        onLoad={() => setLoading(false)}
+                    />
+                </div>
+                <div>
+                    <Link
+                        style={{ color: '#303030' }}
+                        to={`/user/${post.user.user}`}
                     >
-                        {post.user.user}
-                    </p>
+                        <p className="post-user">{post.user.user}</p>
+                    </Link>
                     <p className="post-date info">
                         {formatDate(post.createdAt)}
                     </p>
                 </div>
             </div>
             <div className="post-content">
-                <p className="post-text">{post.text}</p>
+                {post.text.length > 0 && (
+                    <p className="post-text">{post.text}</p>
+                )}
+                {post.images.length > 0 && (
+                    <div className="post-images">
+                        <Carousel
+                            showIndicators={post.images.length > 1}
+                            showStatus={post.images.length > 1}
+                            showThumbs={false}
+                            emulateTouch
+                            swipeScrollTolerance={10}
+                            statusFormatter={(current, total) =>
+                                `${current} / ${total}`
+                            }
+                        >
+                            {post.images.map((key, i) => (
+                                <div key={i} className="image">
+                                    <img
+                                        src={`${process.env.REACT_APP_API}/img?w=580&key=${key.image}`}
+                                        alt={`post-${i}`}
+                                    />
+                                </div>
+                            ))}
+                        </Carousel>
+                    </div>
+                )}
             </div>
             <div className="post-status">
                 <p>{likedString}</p>
@@ -67,6 +105,7 @@ export default ({ post }) => {
                         : `${comments.length} comments`}
                 </p>
             </div>
+            <div className="grayline"></div>
             <div className="post-footer">
                 <div className="action" onClick={() => handlePostLike(post.id)}>
                     <Icon

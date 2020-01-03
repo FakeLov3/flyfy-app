@@ -1,5 +1,5 @@
 .create-post {
-    width: 500px;
+    width: 100%;
     min-height: 150px;
     height: auto;
     padding: 0;
@@ -10,10 +10,20 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        padding: 12px;
+        padding: 0;
         box-sizing: border-box;
         background-color: #ffffff;
         border-radius: 0 0 5px 5px;
+
+        &.has-no-files {
+            .action {
+                margin: 6px 12px 12px;
+            }
+
+            .preview-wrapper {
+                margin: 0;
+            }
+        }
     }
 
     .head {
@@ -38,7 +48,7 @@
     }
 
     .text {
-        margin: 0 0 12px 0;
+        margin: 0 0 6px 0;
         min-height: 75px;
         height: auto;
         padding: 8px;
@@ -48,7 +58,7 @@
 
         textarea {
             width: 100%;
-            min-height: 48px;
+            min-height: 58px;
             padding: 0;
             box-sizing: border-box;
             resize: none;
@@ -56,21 +66,44 @@
         }
     }
 
-    .action {
+    .preview-wrapper {
         display: flex;
-    }
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin: 0;
+        padding: 0 6px;
 
-    .action .btn {
-        margin: 0 6px 0 0;
-        align-items: flex-end;
-
-        p {
-            font-family: 'Circular';
-            margin: 0 0 0 3px;
+        .preview {
+            max-width: 25%;
+            width: 100%;
+            height: 150px;
+            box-sizing: border-box;
+            object-fit: cover;
+            padding: 6px;
+            border-radius: 12px;
         }
     }
 
-    .action .post-btn {
-        margin: 0 0 0 auto;
+    .action {
+        display: flex;
+        margin: 6px 12px 12px;
+
+        .btn {
+            margin: 0 6px 0 0;
+            align-items: flex-end;
+
+            p {
+                font-family: 'Circular';
+                margin: 0 0 0 3px;
+            }
+        }
+
+        .post-btn {
+            margin: 0 0 0 auto;
+        }
+    }
+
+    .input-file {
+        display: none;
     }
 }

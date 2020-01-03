@@ -1,0 +1,56 @@
+.sidebar {
+    padding: 0;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    background-color: #404040;
+    max-width: 200px;
+    padding: 0;
+    height: calc(100% - 56px);
+
+    .divider {
+        width: 100%;
+        min-height: 1px;
+        background-color: #303030;
+    }
+
+    .item {
+        cursor: pointer;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: auto;
+        padding: 12px 0;
+        box-sizing: border-box;
+        transition: background-color 0.25s ease;
+
+        .profile-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            box-shadow: 0 1px 2px 0.5px #30303050;
+        }
+
+        .item-icon {
+            margin: 0 12px;
+            min-width: 32px;
+        }
+
+        .item-name {
+            width: 100%;
+        }
+
+        .profile-name {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        &:hover {
+            background-color: #303030;
+        }
+    }
+}

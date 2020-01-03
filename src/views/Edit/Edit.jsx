@@ -46,7 +46,7 @@ export default props => {
     }, []);
 
     const getEditData = () => {
-        api.get('/user?username=')
+        api.get('/user')
             .then(({ data }) => {
                 setData(data);
                 setLoader('');
@@ -79,7 +79,7 @@ export default props => {
         Object.keys(inputs).forEach(key => formData.append(key, inputs[key]));
         blob && formData.append('blob', blob);
 
-        api.post('/updatedProfileInfo', formData, {
+        api.post('/updateProfileInfo', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
@@ -92,7 +92,10 @@ export default props => {
         event.persist();
         setInputs(inputs => ({
             ...inputs,
-            [event.target.name]: event.target.value,
+            [event.target.name]:
+                event.target.name === 'user'
+                    ? event.target.value.toLowerCase()
+                    : event.target.value,
         }));
     };
 
@@ -212,6 +215,7 @@ export default props => {
                                             <Input
                                                 align="left"
                                                 className={`edit-input`}
+                                                value={data[input.name]}
                                                 defaultValue={
                                                     data[input.name] || ''
                                                 }
