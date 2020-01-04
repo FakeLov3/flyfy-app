@@ -16,14 +16,13 @@ import './Header.scss';
 export default ({ data }) => {
     const [dropdown, setDropdown] = useState({ active: false });
 
-    const handleUserProfileClick = () => {
-        console.log('opa');
-    };
-
     const dropdownItems = [
         {
             name: 'Sign out',
-            onClick: () => console.log('meu irmao'),
+            onClick: () => {
+                localStorage.removeItem('token');
+                window.location.replace('/signin');
+            },
         },
     ];
 
@@ -47,16 +46,16 @@ export default ({ data }) => {
                         }
                         className="search"
                     />
-                    <div
+                    <Link
+                        to={`/user/${data.user}`}
                         data-tip="Profile"
-                        onClick={() => handleUserProfileClick()}
                         className="profile-pic"
                     >
                         <img
                             src={data.profilePic || noProfilePic}
                             alt="profile-pic"
                         />
-                    </div>
+                    </Link>
                     <div className="divider" />
                     <div data-tip="Followers" className="icon multiple">
                         <Icon

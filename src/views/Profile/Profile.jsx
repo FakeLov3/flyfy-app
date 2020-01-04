@@ -14,7 +14,7 @@ export default props => {
         setLoader('active');
         getUserData();
         // eslint-disable-next-line
-    }, []);
+    }, [user]);
 
     const getUserData = () => {
         api.get(`user?username=${user}`)

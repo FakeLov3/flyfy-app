@@ -84,7 +84,7 @@ export default props => {
                 'Content-Type': 'multipart/form-data',
             },
         })
-            .then(() => window.location.reload())
+            .then(() => (window.location.pathname = '/'))
             .catch(() => setLoader(''));
     };
 
@@ -249,7 +249,9 @@ export default props => {
                                 color="#ffffff"
                             />
                         </Button>
-                        <Button>
+                        <Button
+                            onClick={() => (window.location.pathname = '/')}
+                        >
                             Cancel
                             <Icon path={mdiCancel} size={0.7} color="#ffffff" />
                         </Button>

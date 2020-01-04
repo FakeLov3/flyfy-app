@@ -10,6 +10,7 @@ export default props => {
 
     useEffect(() => {
         client.send(JSON.stringify(room));
+        // eslint-disable-next-line
     }, []);
 
     const handleSendMessage = () => {
