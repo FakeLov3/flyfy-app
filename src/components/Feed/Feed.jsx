@@ -5,6 +5,8 @@ import { CreatePost, Suggestions } from '../';
 import Posts from './Posts';
 import './Feed.scss';
 
+const isMobile = window.innerWidth < 768;
+
 export default props => {
     const [offset, setOffset] = useState(0);
     const [feed, setFeed] = useContext(FeedContext);
@@ -58,7 +60,7 @@ export default props => {
                     />
                 </main>
             </div>
-            <Suggestions />
+            {!isMobile && <Suggestions />}
         </>
     );
 };

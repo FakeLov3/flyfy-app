@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, Suspense } from 'react';
 import api from '../../services/api';
 import { LoaderContext } from '../../config/context';
 import { Switch, Route } from 'react-router-dom';
@@ -24,17 +24,19 @@ export default props => {
 
     return (
         <div className="layout dashboard">
-            <Header data={data} />
-            <div className="content">
-                <Sidebar data={data} />
-                <Switch>
-                    <Route exact path="/" component={Feed} />
-                    <Route exact path="/settings" component={Edit} />
-                    <Route exact path="/user/:user" component={Profile} />
-                </Switch>
-                <Chat />
-                <Friends />
-            </div>
+            <Suspense fallback={<></>}>
+                <Header data={data} />
+                <div className="content">
+                    <Sidebar data={data} />
+                    <Switch>
+                        <Route exact path="/" component={Feed} />
+                        <Route exact path="/settings" component={Edit} />
+                        <Route exact path="/user/:user" component={Profile} />
+                    </Switch>
+                    <Chat />
+                    <Friends />
+                </div>
+            </Suspense>
         </div>
     );
 };
