@@ -10,6 +10,7 @@ import {
     mdiAccountGroup,
     mdiFire,
     mdiSettings,
+    mdiMenuDown,
 } from '@mdi/js';
 import './Sidebar.scss';
 
@@ -38,6 +39,14 @@ export default ({ data }) => {
             path: '/groups',
             icon: mdiAccountGroup,
             size: 0.65,
+            sub: [
+                {
+                    name: 'Create a group',
+                    path: '/groups/create',
+                    icon: mdiAccountGroup,
+                    size: 0.65,
+                },
+            ],
         },
         {
             name: 'Settings',

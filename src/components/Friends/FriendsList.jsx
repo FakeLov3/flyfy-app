@@ -14,8 +14,8 @@ export default ({ data }) => {
             ...rooms,
             {
                 type: 'connection',
-                room: room.id,
-                name: room.name,
+                room: room.chatId,
+                name: room.chatName,
             },
         ]);
     };
@@ -68,7 +68,7 @@ export default ({ data }) => {
                                 className="profile-icon item-icon"
                             ></img>
                             <p className="profile-name item-name">
-                                {room.name || room.id}
+                                {room.chatName || room.chatId}
                             </p>
                         </div>
                     ))}
