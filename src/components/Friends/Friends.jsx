@@ -15,8 +15,28 @@ export default props => {
     useEffect(() => {
         api.get('/friends')
             .then(({ data }) => {
-                console.log(data);
-                setData(data);
+                const rooms = [];
+                data.rooms.forEach(room => {
+                    const {
+                        chatId,
+                        chatType,
+                        chatName,
+                        userId,
+                        name,
+                        user,
+                    } = room;
+                    rooms[chatId] = {
+                        ...(rooms[chatId] || {}),
+                        chatId,
+                        chatType,
+                        chatName,
+                    };
+                    rooms[chatId].users = [
+                        ...(rooms[chatId].users || []),
+                        { userId, name, user },
+                    ];
+                });
+                setData({ ...data, rooms });
             })
             .catch(error => console.error(error));
     }, []);

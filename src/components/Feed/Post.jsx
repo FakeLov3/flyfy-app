@@ -24,14 +24,12 @@ export default ({ post }) => {
             .catch(error => console.error(error));
     };
 
-    const handleUserProfileClick = user => {};
-
     const likedString = `${
         liked
             ? reactions.length < 2
                 ? 'You liked this'
                 : reactions.length === 2
-                ? `You and another user liked this`
+                ? `You and another person liked this`
                 : `You and ${reactions.length - 1} people liked this`
             : reactions.length > 1
             ? `${reactions.length} likes`
@@ -43,10 +41,7 @@ export default ({ post }) => {
     return (
         <Card className={`post${loading ? ' loading' : ''}`}>
             <div className="profile">
-                <div
-                    onClick={() => handleUserProfileClick(post.user)}
-                    className="profile-pic"
-                >
+                <Link to={`/user/${post.user.user}`} className="profile-pic">
                     <img
                         src={
                             post.user.profilePic
@@ -56,7 +51,7 @@ export default ({ post }) => {
                         alt="profile-pic"
                         onLoad={() => setLoading(false)}
                     />
-                </div>
+                </Link>
                 <div>
                     <Link
                         style={{ color: '#303030' }}

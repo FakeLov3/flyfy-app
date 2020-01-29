@@ -5,6 +5,8 @@ import { CreatePost, Suggestions } from '../';
 import Posts from './Posts';
 import './Feed.scss';
 
+const isMobile = window.innerWidth < 768;
+
 export default props => {
     const [offset, setOffset] = useState(0);
     const [feed, setFeed] = useContext(FeedContext);
@@ -25,7 +27,7 @@ export default props => {
         setStatus('loading');
         api.get(`/feed/${offset}`)
             .then(({ data }) => {
-                console.log(data);
+                // console.log(data);
                 setStatus('success');
                 overload.current = data.length < limit || data.length === 0;
                 if (data.length > 0) {
@@ -40,7 +42,8 @@ export default props => {
     };
 
     const handleFeedScroll = () =>
-        window.scrollY + window.innerHeight > feedRef.current.scrollHeight &&
+        window.scrollY + window.innerHeight + 50 >
+            feedRef.current.scrollHeight &&
         status !== 'loading' &&
         getFeedPosts();
 
@@ -58,7 +61,7 @@ export default props => {
                     />
                 </main>
             </div>
-            <Suggestions />
+            {!isMobile && <Suggestions />}
         </>
     );
 };
