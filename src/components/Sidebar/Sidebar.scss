@@ -58,4 +58,18 @@
             background-color: #303030;
         }
     }
+
+    &.mobile {
+        transition: left 0.5s ease;
+        left: -66%;
+    }
+
+    &.mobile.active {
+        left: 0;
+    }
+
+    @media only screen and (max-width: 768px) {
+        height: 100%;
+        max-width: 65%;
+    }
 }

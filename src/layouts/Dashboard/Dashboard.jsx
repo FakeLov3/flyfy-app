@@ -27,6 +27,7 @@ export default props => {
             <Suspense fallback={<></>}>
                 <Header data={data} />
                 <div className="content">
+                    {/* adicionar o contexto do sidebar aqui */}
                     <Sidebar data={data} />
                     <Switch>
                         <Route exact path="/" component={Feed} />
