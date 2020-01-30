@@ -1,1 +1,0 @@
-{"version":3,"sources":["components/Sidebar/MobSidebar.jsx"],"names":["props"],"mappings":"gGAAA,2BAEe,mBAAAA,GACX,OAAO","file":"static/js/8.7342fffc.chunk.js","sourcesContent":["import React from 'react';\r\n\r\nexport default props => {\r\n    return <></>;\r\n};\r\n"],"sourceRoot":""}
