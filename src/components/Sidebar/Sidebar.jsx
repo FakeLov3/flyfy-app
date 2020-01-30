@@ -1,20 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 // import ReactTooltip from 'react-tooltip';
 import { Bar } from '../';
 import Icon from '@mdi/react';
 import noProfilePic from '../../assets/images/no-profile-pic.png';
+import { SidebarContext } from '../../config/context';
 import {
     mdiNewspaperVariant,
     mdiMessage,
     mdiAccountGroup,
     mdiFire,
     mdiSettings,
-    mdiMenuDown,
 } from '@mdi/js';
 import './Sidebar.scss';
 
 export default ({ data }) => {
+    const { mobileSidebar } = useContext(SidebarContext);
+
     const items = [
         {
             name: 'Feed',
@@ -57,8 +59,18 @@ export default ({ data }) => {
     ];
 
     return (
-        <Bar className="sidebar">
-            <Link to={`/user/${data.user}`} className="profile-item item">
+        <Bar
+            className={`sidebar ${
+                window.isMobile && mobileSidebar ? 'mobile active' : 'mobile'
+            }`}
+        >
+            <Link
+                style={{
+                    margin: window.isMobile ? '48px 0 0' : '0',
+                }}
+                to={`/user/${data.user}`}
+                className="profile-item item"
+            >
                 <img
                     src={data.profilePic || noProfilePic}
                     alt="profile"

@@ -13,7 +13,7 @@ import Header from './Header';
 import Input from './Input/IconInput';
 import Loader from './Loader/Loader';
 import Modal from './Modal/Modal';
-import Sidebar from './Sidebar';
+import Sidebar from './Sidebar/Sidebar';
 import Suggestions from './Suggestions/Suggestions';
 
 import './Feed/Feed.scss';

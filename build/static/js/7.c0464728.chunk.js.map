@@ -1,1 +1,0 @@
-{"version":3,"sources":["components/Friends/MobFriends.jsx"],"names":["props"],"mappings":"gGAAA,2BAEe,mBAAAA,GAAK,OAAI","file":"static/js/7.c0464728.chunk.js","sourcesContent":["import React from 'react';\r\n\r\nexport default props => <></>;\r\n"],"sourceRoot":""}

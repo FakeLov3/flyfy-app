@@ -5,6 +5,7 @@ const FeedContext = createContext();
 const ModalContext = createContext();
 const CropperContext = createContext();
 const ChatContext = createContext();
+const SidebarContext = createContext();
 
 export {
     LoaderContext,
@@ -12,4 +13,5 @@ export {
     ModalContext,
     CropperContext,
     ChatContext,
+    SidebarContext,
 };
