@@ -5,7 +5,7 @@ import { mdiSend } from '@mdi/js';
 import './Chat.scss';
 
 export default props => {
-    const { room, connected, client, messages, position } = props;
+    const { room, connected, client, messages, position, userTyping } = props;
     const [message, setMessage] = useState('');
 
     useEffect(() => {
@@ -23,6 +23,14 @@ export default props => {
         };
         setMessage('');
         connected && client.send(JSON.stringify(data));
+    };
+
+    const handleTyping = () => {
+        const data = {
+            type: 'typing',
+            to: room.room,
+        };
+        client.send(JSON.stringify(data));
     };
 
     return (
@@ -49,6 +57,7 @@ export default props => {
                 ) : (
                     <></>
                 )}
+                {userTyping && <p>User is typing</p>}
             </div>
             <div className="footer">
                 <div className="message">
@@ -56,6 +65,7 @@ export default props => {
                         maxRows={5}
                         value={message}
                         onChange={event => setMessage(event.target.value)}
+                        onKeyDown={handleTyping}
                         spellCheck="false"
                         draggable="false"
                         placeholder="Type your message"

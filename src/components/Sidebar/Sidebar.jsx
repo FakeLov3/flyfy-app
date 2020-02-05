@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-// import ReactTooltip from 'react-tooltip';
 import { Bar } from '../';
 import Icon from '@mdi/react';
 import noProfilePic from '../../assets/images/no-profile-pic.png';
@@ -15,7 +14,7 @@ import {
 import './Sidebar.scss';
 
 export default ({ data }) => {
-    const { mobileSidebar } = useContext(SidebarContext);
+    const { mobileSidebar, setMobileSidebar } = useContext(SidebarContext);
 
     const items = [
         {
@@ -59,43 +58,57 @@ export default ({ data }) => {
     ];
 
     return (
-        <Bar
-            className={`sidebar ${
-                window.isMobile && mobileSidebar ? 'mobile active' : 'mobile'
-            }`}
-        >
-            <Link
-                style={{
-                    margin: window.isMobile ? '48px 0 0' : '0',
-                }}
-                to={`/user/${data.user}`}
-                className="profile-item item"
+        <>
+            <Bar
+                className={`sidebar ${
+                    window.isMobile
+                        ? mobileSidebar
+                            ? 'mobile active'
+                            : 'mobile'
+                        : ''
+                }`}
             >
-                <img
-                    src={data.profilePic || noProfilePic}
-                    alt="profile"
-                    className="profile-icon item-icon"
-                ></img>
-                <p className="profile-name item-name">{data.user}</p>
-            </Link>
-            <div className="divider" />
-            {items.map((item, i) => (
                 <Link
-                    to={item.path}
-                    className={`item${
-                        window.location.pathname === item.path ? ' active' : ''
-                    }`}
-                    key={i}
+                    style={{
+                        margin: window.isMobile ? '48px 0 0' : '0',
+                    }}
+                    to={`/user/${data.user}`}
+                    className="profile-item item"
                 >
-                    <Icon
-                        className="item-icon"
-                        path={item.icon}
-                        size={item.size}
-                        color="#ffffff"
-                    />
-                    <p className="item-name">{item.name}</p>
+                    <img
+                        src={data.profilePic || noProfilePic}
+                        alt="profile"
+                        className="profile-icon item-icon"
+                    ></img>
+                    <p className="profile-name item-name">{data.user}</p>
                 </Link>
-            ))}
-        </Bar>
+                <div className="divider" />
+                {items.map((item, i) => (
+                    <Link
+                        to={item.path}
+                        className={`item${
+                            window.location.pathname === item.path
+                                ? ' active'
+                                : ''
+                        }`}
+                        key={i}
+                    >
+                        <Icon
+                            className="item-icon"
+                            path={item.icon}
+                            size={item.size}
+                            color="#ffffff"
+                        />
+                        <p className="item-name">{item.name}</p>
+                    </Link>
+                ))}
+            </Bar>
+            <div
+                onClick={() => setMobileSidebar(false)}
+                className={`mob-sidebar-wrapper ${
+                    mobileSidebar ? 'active' : 'hidden'
+                }`}
+            ></div>
+        </>
     );
 };

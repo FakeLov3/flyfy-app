@@ -3,10 +3,11 @@ import { ChatContext } from '../../config/context';
 import ChatWindow from './ChatWindow';
 import './Chat.scss';
 
-export default props => {
+export default () => {
     const [connected, setConnected] = useState(false);
     const [messages, setMessages] = useState({});
     const [client, setClient] = useState(null);
+    const [userTyping, setUserTyping] = useState(false);
     const { openRooms } = useContext(ChatContext);
 
     useEffect(() => {
@@ -33,6 +34,9 @@ export default props => {
                         [data.to]: [...(messages[data.to] || []), data],
                     })),
                 connection: () => setConnected(true),
+                typing: () => {
+                    setUserTyping(true);
+                },
             }[data.type]))().call();
     };
 
@@ -45,6 +49,7 @@ export default props => {
             client={client}
             receive={handleReceiveMessage}
             messages={messages[room.room]}
+            userTyping={userTyping}
         />
     ));
 };
