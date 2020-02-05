@@ -9,7 +9,7 @@ import {
     SidebarContext,
 } from './config/context';
 
-window.isMobile = window.innerWidth < 768;
+window.isMobile = window.innerWidth <= 768;
 
 export default () => {
     const [loader, setLoader] = useState('');

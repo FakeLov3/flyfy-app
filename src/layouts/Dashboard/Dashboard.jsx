@@ -2,9 +2,16 @@ import React, { useState, useEffect, useContext, Suspense } from 'react';
 import api from '../../services/api';
 import { LoaderContext } from '../../config/context';
 import { Switch, Route } from 'react-router-dom';
-import { Chat, Friends, Header, Sidebar } from '../../components';
+import { Friends, Header, Sidebar } from '../../components';
 import { Feed, Profile, Edit } from '../../views';
 import './Dashboard.scss';
+
+const Chat = !window.isMobile ? (
+    React.lazy(() => import('../../components/Chat/Chat'))
+) : (
+    // add mobile chat later
+    <></>
+);
 
 export default props => {
     const [data, setData] = useState({});

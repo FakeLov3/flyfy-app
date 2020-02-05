@@ -1,7 +1,6 @@
 import Bar from './Bar/Bar';
 import Button from './Button/Button';
 import Card from './Card/Card';
-import Chat from './Chat/Chat';
 import Checkbox from './Checkbox/Checkbox';
 import CreatePost from './CreatePost/CreatePost';
 import Cropper from './Cropper/Cropper';
@@ -22,7 +21,6 @@ export {
     Bar,
     Button,
     Card,
-    Chat,
     Checkbox,
     CreatePost,
     Cropper,
